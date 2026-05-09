@@ -34,7 +34,7 @@ extensions/
 
 ## Storage & sync architecture
 
-**Single source of truth** = the GitHub repository (https://github.com/My-projects-portfolio/mtad-platform). Every machine — dev laptop, EC2 GPU instance, future collaborator — must be reproducible from `git clone` + a `scripts/sync_all.sh` (to be created).
+**Single source of truth** = the GitHub repository (https://github.com/My-projects-portfolio/mtad-platform). Every machine — dev laptop, EC2 GPU instance, future collaborator — must be reproducible from `git clone` + the sync helpers in `scripts/`.
 
 **Hard rule: any single file >5 MB does NOT go in git.** No exceptions.
 
@@ -55,7 +55,9 @@ What goes where:
   - `results/runs/<run_id>.json` — small, in git: config, metrics, environment, timings
   - `results/scores/<run_id>.npy` — large, in S3: raw decision-function scores
 - **Adding a new metric never requires re-training.** New metrics recompute from cached `scores/<run_id>.npy`.
-- The S3 bucket name and region (`ap-southeast-2`) are set up in Session 2 — see "Hardware & AWS context" below.
+- The S3 bucket and region details live under "Hardware & AWS context" below.
+
+**Sync helpers** (Session 2): `scripts/sync_from_s3.sh {datasets|scores|checkpoints|exports|all}` pulls; `scripts/sync_to_s3.sh ...` pushes. Both support `--dry-run` and are idempotent (`aws s3 sync` only transfers changed files). On a fresh machine: `git clone` then `scripts/sync_from_s3.sh datasets` to fetch data. Defaults come from env: `MTAD_S3_BUCKET=mtad-platform-imanian-2026`, `AWS_PROFILE=mtad`. `*.sh` files are kept LF-only via `.gitattributes` so they run on Linux/EC2 even when authored on Windows.
 
 ## Coding conventions
 
@@ -127,15 +129,16 @@ TSB-AD's `Standard-F1` and `PA-F1` are **oracle** F1 — they sweep all threshol
 
 **Development laptop**: Windows 11 (corporate-managed), CPU-only. Quick iteration, classical models, smoke tests, code authoring. See "Application Control constraint" below for environment caveats.
 
-**Training**: AWS EC2 GPU. Existing instance is **already provisioned and currently stopped** — only start when actively training to avoid idle cost. Instance type TBD/already-set; verify in Session 2.
+**Training**: AWS EC2 GPU. Existing instance is **already provisioned and currently stopped** — only start when actively training to avoid idle cost. Instance type TBD/already-set; verify in Session 3 (Remote-SSH wiring).
 
 **AWS account context:**
 
-- **Account type**: institutional (university-managed). Policy restrictions are possible — assume any new resource may need IT approval.
+- **Account type**: RMIT-managed (institutional), account ID `430442692195`. SSO portal: `https://rmit-research.awsapps.com/start`. Policy restrictions are possible — assume any new resource may need IT approval.
+- **Auth**: SSO only (no long-lived access keys). Local profile `mtad` aliases the `RMIT-ResearchAdmin` role on the same account, sharing the `aws-rmit` SSO session. Refresh creds with `aws sso login --profile mtad` (loopback OAuth flow; opens the RMIT SSO page, redirects to `127.0.0.1`). Temp creds last ~hours; re-login when expired.
 - **Region**: `ap-southeast-2` (Sydney). **Keep all resources in this region** — cross-region data transfer is both billed and slow.
-- **S3 bucket** (for scores, checkpoints, datasets): name TBD, to be created in Session 2.
-- **IAM**: access keys configured locally on the dev laptop.
-- **Cost discipline**: stop the GPU instance whenever it is not actively training. Estimated S3 storage cost is negligible (<$2/month at expected volumes); the dominant cost driver is GPU instance-hours.
+- **S3 bucket**: `mtad-platform-imanian-2026` in `ap-southeast-2`. Versioning **enabled**, all four public-access-block flags **on**, server-side encryption SSE-S3 (AES-256, default). Bucket layout: `datasets/`, `scores/`, `checkpoints/`, `exports/` (each seeded with a `.keep` marker so the prefixes show up in the AWS console).
+- **Bucket ownership caveat**: the bucket lives in RMIT's AWS account, not a personal account. RMIT pays the bill and ultimately controls deletion. **If you leave RMIT, you lose access** — keep a personal-archive copy of any artifact load-bearing for thesis/paper submission.
+- **Cost discipline**: stop the GPU instance whenever it is not actively training. Estimated S3 storage cost is negligible (<$2/month at expected volumes); the dominant cost driver is GPU instance-hours. Versioning is on, so deletes don't free space — old versions persist; revisit a lifecycle rule (expire non-current after N days) if storage grows.
 
 **Portability rule**: code must run on both CPU laptop and GPU EC2. Detect device with `torch.cuda.is_available()`; never assume CUDA.
 
@@ -205,18 +208,18 @@ The Windows 11 laptop is corporate-managed with **Application Control (deny-scri
 5. Walk through the roadmap (next 4–6 weeks)
 6. Ask: scope cuts, paper venue, supervisor's preferred angle
 
-## Next session preview — Session 2
+## Next session preview — Session 3
 
-**Goal**: AWS plumbing end-to-end so deep models can train on GPU and results sync back.
+**Goal**: connect to the existing EC2 GPU instance and prove the round-trip via S3.
 
-- Install AWS CLI on the dev laptop
-- Create the S3 bucket in `ap-southeast-2` (name to be chosen)
-- Smoke-test upload + download of a small file
-- Verify connection to the existing EC2 GPU instance via VS Code Remote-SSH
+- Verify SSH/Remote-SSH connection to the existing (currently stopped) GPU instance
 - Install Claude Code on the EC2 instance
-- Full round-trip data sync test: push from laptop → S3 → pull from EC2
+- Sync repo to EC2 via `git clone`
+- Configure AWS SSO on EC2 (or use IAM role attached to the instance, if simpler)
+- Round-trip test: push a small artifact from laptop → S3 → pull on EC2 via `scripts/sync_from_s3.sh`
+- Stop the instance at end of session
 
-**Explicitly deferred to Session 3 or later** (do not let scope creep pull these into Session 2):
+**Explicitly deferred to Session 4 or later** (do not let scope creep pull these into Session 3):
 
 - Converting `TSB-AD/` from gitignored vendor copy to a proper git submodule
 - Scaffolding the `extensions/` directory skeleton
