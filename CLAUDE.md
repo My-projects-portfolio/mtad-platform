@@ -80,6 +80,15 @@ TSB-AD ships: `AUC-ROC, AUC-PR, VUS-ROC, VUS-PR, Standard-F1 (oracle), PA-F1 (or
 
 For any change that touches more than ~3 files or introduces a new abstraction, **write a short plan first** (use the `Plan` agent or `ExitPlanMode`) and get explicit user approval before editing. Bug fixes and one-file tweaks don't need this. The user has been burned by half-finished refactors and prefers the alignment cost.
 
+## GitHub & web presence
+
+- **Repository**: https://github.com/My-projects-portfolio/mtad-platform (public — flipped from private to enable Pages on the free tier)
+- **Pages site**: https://my-projects-portfolio.github.io/mtad-platform/ — built from `docs/` via `.github/workflows/pages.yml` (Jekyll on GitHub Actions, theme `jekyll-theme-cayman`). Workflow re-runs on push to `main` when `docs/**` changes.
+- **Branch strategy**: only `main` for now. Introduce feature branches + PR-based workflow when collaborators or CI gates appear.
+- **SSH access**: project-specific key at `~/.ssh/id_ed25519_github`, routed in `~/.ssh/config` for `github.com` with `IdentitiesOnly yes`. No `ssh-agent` — key is read directly from disk on each git operation (the Windows `ssh-agent` service is disabled on this laptop and enabling it requires admin).
+- **Commit identity**: `Nafiseh Imanian <57588284+My-projects-portfolio@users.noreply.github.com>` (GitHub no-reply form, set globally).
+- **`gh` CLI**: installed via `winget install --id GitHub.cli`, authenticated to `github.com` as `My-projects-portfolio` with scopes `repo, read:org, gist`.
+
 ---
 
 ## Quick orientation pointers (kept minimal — see NOTES.md for detail)
