@@ -40,6 +40,7 @@ extensions/
 - **No hardcoded paths** — all paths come from a YAML config or `pathlib.Path` derived from a project root sentinel
 - **All configs in YAML** — argparse only for `--config path/to/config.yaml` and minor overrides; Hydra/OmegaConf preferred once we add it
 - **Reproducibility** — every run logs git SHA, config YAML, seed, environment (CPU/GPU model, RAM, package versions) into the results directory
+- **Preserve the `--file_lsit` typo** when calling TSB-AD's runner scripts. Do not "correct" it — argparse depends on the literal misspelling. Document this fact in any wrapper or runner that calls the upstream scripts.
 
 ## Models to add beyond TSB-AD's defaults
 
