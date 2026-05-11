@@ -259,3 +259,20 @@ This is exactly the pattern we will follow from a parallel `extensions/` folder 
 - Comprehensive metric coverage including the headline VUS-PR
 - Datasets are well-curated and unified — same CSV format everywhere
 - `eval/metrics/<MODEL>.csv` format is dead-simple to aggregate across runs
+
+---
+
+## 12. Dataset download (Session 5, 2026-05-11)
+
+The full TSB-AD-M multivariate set was downloaded to EC2's EBS volume so subsequent sessions can run any TSB-AD model against the full benchmark.
+
+- **Source URL**: `https://www.thedatum.org/datasets/TSB-AD-M.zip` (direct download from the TSB-AD authors' site; no auth required; served behind Cloudflare, origin LiteSpeed).
+- **Zip size**: 540,383,983 bytes (~515 MiB / 540 MB). `last-modified: Sun, 10 May 2026 10:12 GMT`.
+- **Method**: `wget --show-progress` inside a detached `tmux` session on EC2; sustained ~21.9 MB/s, full transfer in ~25 seconds. `unzip -t` integrity passed (every member CRC32 verified) before extraction.
+- **Extract destination**: `~/mtad-platform/TSB-AD/Datasets/TSB-AD-M/`. The zip contains a single top-level `TSB-AD-M/` folder, so the extract command was `unzip -o /tmp/TSB-AD-M.zip -d ~/mtad-platform/TSB-AD/Datasets/`. The Session 4 bundled `057_SMD_id_1_Facility_tr_4529_1st_4629.csv` was overwritten by its byte-identical zip copy (net no-op).
+- **Contents**: 200 CSVs, 2.5 GB extracted (compression ratio ~4.8×). All files dated 2024-10-23 (the canonical NeurIPS-D&B release timestamps).
+- **Coverage**: 180/180 files listed in `Datasets/File_List/TSB-AD-M-Eva.csv` present on disk (0 missing, verified by a per-file `test -f` loop). The remaining ~20 files are the `TSB-AD-M-Tuning.csv` HP-tuning split.
+- **Datasets represented**: MSL, SMAP, SMD, SVDB, MITDB, LTDB, GHL, Exathlon, CATSv2, Genesis (Sensor / Medical / Facility categories).
+- **Format verified** on 3 random files (`080_LTDB_id_2_Medical`, `139_CATSv2_id_2_Sensor`, `002_MSL_id_1_Sensor`): canonical TSB-AD layout — header row + numeric feature columns + trailing `Label` column. Matches the contract `TSB_AD/utils/slidingWindows.py` and the runner scripts expect.
+- **Gitignore**: covered by the bare `TSB-AD/` rule at `.gitignore:62`. `git check-ignore -v` confirms every dataset file is excluded; `git status` on EC2 stayed clean after extraction. No risk of accidental commit of the 2.5 GB payload.
+- **Persistence**: the dataset lives only on EC2's EBS volume per the Phase 1 storage strategy. The backup cadence in CLAUDE.md (weekly tar to laptop, monthly EBS snapshot) applies. Re-download on a fresh machine is one `wget` + `unzip` away.
