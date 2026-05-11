@@ -52,7 +52,6 @@ Thumbs.db
 
 # --- Project-specific: research artifacts ---
 data/
-results/
 outputs/
 multirun/
 wandb/
