@@ -14,6 +14,20 @@ Build a **long-term personal multivariate time-series anomaly detection (MTAD) r
 - The platform must serve **multiple papers**, not a single experiment, so reusability and extensibility are first-class concerns.
 - Outputs are: (i) reproducible benchmark numbers for baselines, (ii) clean ablations of the proposed method, (iii) consistent figure/table generation across papers.
 
+## Completed milestones
+
+- **Session 1**: GitHub repository + Pages site live (`jekyll-theme-cayman` placeholder, deploy workflow on push to `main`).
+- **Session 2**: AWS S3 bucket `mtad-platform-imanian-2026` provisioned in `ap-southeast-2` with versioning, public-access-block, SSE-S3, and prefix layout seeded. Activation deferred to Phase 2 — see "Storage & sync architecture".
+- **Session 3**: EC2 wired up (`mtad-ec2`, g5.xlarge / A10G). `node` + Claude Code installed on EC2; repo cloned to `~/mtad-platform/` on EBS. IAM permission gap surfaced and documented — Phase 2 will require an RMIT IT request.
+- **Session 4 (2026-05-11)**: Full TSB-AD venv on EC2 (Python 3.11, PyTorch 2.11 + CUDA 13.0; A10G detected). TSB-AD installed editable; all five core models import cleanly (IForest, USAD, TranAD, AnomalyTransformer, OmniAnomaly). First end-to-end smoke test: IForest on the bundled SMD 057 dataset — AUC-ROC 0.80, AUC-PR 0.10, VUS-ROC 0.81, VUS-PR 0.10, Standard-F1 0.17, PA-F1 0.52, Affiliation-F 0.81. Results CSV + scores `.npy` committed to git; `.gitignore` updated to remove the blanket `results/` exclusion. `gh` CLI installed on EC2 and authenticated via device-code flow; commit pushed from EC2, pulled to laptop.
+
+### Known artifacts (post-Session 4)
+
+- `data/smoke_test_list.csv` — file list pointing the runner at one dataset (the input to `--file_lsit`).
+- `results/runs/IForest.csv` — first metrics CSV.
+- `results/scores/IForest/057_SMD_id_1_Facility_tr_4529_1st_4629.npy` — first raw anomaly scores (190 KB).
+- `057_SMD_id_1_Facility_tr_4529_1st_4629.csv` — 5.8 MB, 23,694 rows × 38 features + Label. **Bundled with TSB-AD** under `TSB-AD/Datasets/` (gitignored as part of the vendored upstream); not separately downloaded.
+
 ## Key design principle: do NOT modify TSB-AD core in place
 
 `TSB-AD/` is treated as a **vendored upstream** — read-only, pull-able. All extensions live in a parallel top-level `extensions/` folder (to be created) with this layout:
@@ -34,30 +48,54 @@ extensions/
 
 ## Storage & sync architecture
 
-**Single source of truth** = the GitHub repository (https://github.com/My-projects-portfolio/mtad-platform). Every machine — dev laptop, EC2 GPU instance, future collaborator — must be reproducible from `git clone` + the sync helpers in `scripts/`.
+**Single source of truth for code** = the GitHub repository (https://github.com/My-projects-portfolio/mtad-platform). Every machine — dev laptop, EC2 GPU instance, future collaborator — must be reproducible from `git clone` plus the data-restore path described below.
 
 **Hard rule: any single file >5 MB does NOT go in git.** No exceptions.
 
-What goes where:
+### Phase 1 (current, as of 2026-05-11): EC2 EBS is the primary data store, git carries small results
+
+Datasets and large artifacts (checkpoints, large score arrays) live on the EC2 instance's EBS volume. **Small results — per-run CSVs and small `.npy` score files — travel via git** to GitHub and the laptop, so the leaderboard and analysis tooling have a live copy without an scp step. The S3 bucket exists but is dormant — activated in Phase 2 below. Reasons for this layout: (i) avoids the RMIT IT IAM-creation request that's currently blocked (see "Hardware & AWS context"), (ii) keeps the workflow simple while there's only one machine, (iii) lets the laptop render results from a plain `git pull`.
+
+What goes where (updated post-Session 4):
 
 | Artifact | Lives in | Notes |
 |---|---|---|
 | Code, configs (YAML), metadata YAMLs, leaderboard sources, website source | git | text, small |
-| Per-run results JSONs (each <5 MB) | git | one file per run |
-| Anomaly score arrays (`*.npy`) | S3 | per-run, sometimes large |
-| Model checkpoints (`*.pt`, `*.ckpt`) | S3 | always large |
-| Datasets (TSB-AD-M, SMD, MSL, SMAP, SWaT, ...) | S3 | downloaded by `scripts/fetch_data.py`, never committed |
+| Per-run metrics CSVs (`results/runs/*.csv`) | git | one row per run |
+| Small anomaly score arrays (`results/scores/<Model>/*.npy`, well under 5 MB) | git | committed since Session 4 — `.gitignore` no longer blanket-excludes `results/` |
+| Large anomaly score arrays (≥ ~50 MB, expected once heavier models run) | EC2 EBS only — `~/mtad-platform/results/scores/` | exclude case-by-case in `.gitignore` when they appear; still bound by the 5 MB hard rule above for git |
+| Model checkpoints (`*.pt`, `*.ckpt`) | EC2 EBS — `~/mtad-platform/results/checkpoints/` | always large; never in git |
+| Datasets (TSB-AD-bundled CSVs, plus future SMD/MSL/SMAP/SWaT native) | EC2 EBS only — `TSB-AD/Datasets/` (gitignored as part of vendored upstream) and `~/mtad-platform/data/` | downloaded once per machine; never committed |
 
-**Caching invariant: experiments are immutable once computed.** Never re-run an experiment we already have. Only add new `(model × dataset × seed)` rows.
+**Workflow (current, as exercised in Session 4):** SSH into EC2 via VS Code Remote-SSH and work there. Code + small results: `git commit`/`git push` from EC2, `git pull` on the laptop. Large artifacts (checkpoints, oversized scores): stay on EBS; `tar` + `scp` to laptop at paper-writing milestones. The laptop is a viewing window plus a local copy of code and lightweight results.
+
+**EBS durability — load-bearing risk to manage:** EBS has no versioning, no cross-AZ durability, and dies with the instance if the volume is set to delete-on-termination. Because EBS is the *only* copy of large artifacts in Phase 1, the backup cadence is mandatory, not optional:
+
+- **Weekly:** `tar` of `~/mtad-platform/results/` and `~/mtad-platform/data/` pulled to the laptop via `scp`.
+- **Monthly:** EBS snapshot via `aws ec2 create-snapshot` (or AWS console).
+- **Cost discipline:** stop the GPU instance whenever not actively training, even for short breaks. Light dev ~$30–50/month; heavy training ~$200–400/month. Track spending via the AWS Billing Dashboard weekly. EBS keeps charging while the instance is stopped, but at a much lower rate than GPU instance-hours.
+
+### Phase 2 (deferred): S3 activation
+
+Trigger conditions: (a) a collaborator joins, (b) results need to flow between multiple machines, (c) load-bearing artifacts approach paper submission and need offsite/versioned durability.
+
+When triggered, the migration is:
+
+1. Email RMIT IT to provision an IAM instance profile granting S3 access scoped to bucket `mtad-platform-imanian-2026` (the role-creation actions are denied to my SSO user — see "Hardware & AWS context"). Draft of the email lives in session notes.
+2. `scripts/sync_from_s3.sh {datasets|scores|checkpoints|exports|all}` pulls; `scripts/sync_to_s3.sh ...` pushes. Both `--dry-run`-aware, idempotent (`aws s3 sync` only transfers changed files). Defaults: `MTAD_S3_BUCKET=mtad-platform-imanian-2026`, `AWS_PROFILE=mtad`. `*.sh` files are kept LF-only via `.gitattributes` so they run on Linux/EC2 even when authored on Windows.
+3. Bootstrap on a fresh machine becomes `git clone` → `scripts/sync_from_s3.sh datasets`.
+
+The bucket is already created with versioning on, all four public-access-block flags on, SSE-S3 encryption, and prefixes `datasets/ scores/ checkpoints/ exports/` seeded — so Phase 2 activation is purely about turning it on, not provisioning.
+
+### Caching invariant (applies in both phases)
+
+**Experiments are immutable once computed.** Never re-run an experiment we already have. Only add new `(model × dataset × seed)` rows.
 
 - Each experiment gets a deterministic `run_id = hash(model_name + model_version + dataset_id + seed + hyperparams + git_sha)`.
-- Layout:
-  - `results/runs/<run_id>.json` — small, in git: config, metrics, environment, timings
-  - `results/scores/<run_id>.npy` — large, in S3: raw decision-function scores
-- **Adding a new metric never requires re-training.** New metrics recompute from cached `scores/<run_id>.npy`.
-- The S3 bucket and region details live under "Hardware & AWS context" below.
-
-**Sync helpers** (Session 2): `scripts/sync_from_s3.sh {datasets|scores|checkpoints|exports|all}` pulls; `scripts/sync_to_s3.sh ...` pushes. Both support `--dry-run` and are idempotent (`aws s3 sync` only transfers changed files). On a fresh machine: `git clone` then `scripts/sync_from_s3.sh datasets` to fetch data. Defaults come from env: `MTAD_S3_BUCKET=mtad-platform-imanian-2026`, `AWS_PROFILE=mtad`. `*.sh` files are kept LF-only via `.gitattributes` so they run on Linux/EC2 even when authored on Windows.
+- Layout (Phase 1):
+  - `results/runs/<Model>.csv` (or `<run_id>.json` once the schema firms up) — small, committed to git: config, metrics, environment, timings.
+  - `results/scores/<Model>/<dataset>.npy` — committed to git when small; EBS-only when large.
+- **Adding a new metric never requires re-training.** New metrics recompute from cached score arrays (in git when small, on EBS when large).
 
 ## Coding conventions
 
@@ -129,16 +167,17 @@ TSB-AD's `Standard-F1` and `PA-F1` are **oracle** F1 — they sweep all threshol
 
 **Development laptop**: Windows 11 (corporate-managed), CPU-only. Quick iteration, classical models, smoke tests, code authoring. See "Application Control constraint" below for environment caveats.
 
-**Training**: AWS EC2 GPU. Existing instance is **already provisioned and currently stopped** — only start when actively training to avoid idle cost. Instance type TBD/already-set; verify in Session 3 (Remote-SSH wiring).
+**Training**: AWS EC2 GPU. Instance `i-0a259946708f10614` ("Nafis-EC2-GPU", g5.xlarge, NVIDIA A10G, Amazon Linux 2023, user `ec2-user`) — provisioned, kept stopped between sessions, only start when actively training. Pre-installed: `aws-cli` 2.33.27, `git` 2.50.1, `tmux` 3.2a. Missing (install in-session as needed): `node`, `claude`. SSH alias `mtad-ec2`; VS Code Remote-SSH verified working.
 
 **AWS account context:**
 
 - **Account type**: RMIT-managed (institutional), account ID `430442692195`. SSO portal: `https://rmit-research.awsapps.com/start`. Policy restrictions are possible — assume any new resource may need IT approval.
 - **Auth**: SSO only (no long-lived access keys). Local profile `mtad` aliases the `RMIT-ResearchAdmin` role on the same account, sharing the `aws-rmit` SSO session. Refresh creds with `aws sso login --profile mtad` (loopback OAuth flow; opens the RMIT SSO page, redirects to `127.0.0.1`). Temp creds last ~hours; re-login when expired.
 - **Region**: `ap-southeast-2` (Sydney). **Keep all resources in this region** — cross-region data transfer is both billed and slow.
-- **S3 bucket**: `mtad-platform-imanian-2026` in `ap-southeast-2`. Versioning **enabled**, all four public-access-block flags **on**, server-side encryption SSE-S3 (AES-256, default). Bucket layout: `datasets/`, `scores/`, `checkpoints/`, `exports/` (each seeded with a `.keep` marker so the prefixes show up in the AWS console).
-- **Bucket ownership caveat**: the bucket lives in RMIT's AWS account, not a personal account. RMIT pays the bill and ultimately controls deletion. **If you leave RMIT, you lose access** — keep a personal-archive copy of any artifact load-bearing for thesis/paper submission.
-- **Cost discipline**: stop the GPU instance whenever it is not actively training. Estimated S3 storage cost is negligible (<$2/month at expected volumes); the dominant cost driver is GPU instance-hours. Versioning is on, so deletes don't free space — old versions persist; revisit a lifecycle rule (expire non-current after N days) if storage grows.
+- **S3 bucket**: `mtad-platform-imanian-2026` in `ap-southeast-2`. Versioning **enabled**, all four public-access-block flags **on**, server-side encryption SSE-S3 (AES-256, default). Bucket layout: `datasets/`, `scores/`, `checkpoints/`, `exports/` (each seeded with a `.keep` marker so the prefixes show up in the AWS console). **Status: dormant in Phase 1.** See "Storage & sync architecture" for activation criteria.
+- **IAM permission gap (verified 2026-05-09)**: the `RMIT-ResearchAdmin` SSO role has `implicitDeny` on `iam:CreateRole`, `iam:PutRolePolicy`, `iam:CreateInstanceProfile`, `iam:AddRoleToInstanceProfile`, `iam:PassRole`, and `ec2:AssociateIamInstanceProfile` (all six checked via `simulate-principal-policy`). No permissions boundary on the role. Account is in AWS Organization `o-2vvrr6u1ue` (master `538238080661` = RMIT IT) with SCPs **enabled** but not introspectable from this account. Implication: I cannot create or attach an EC2 IAM instance profile myself — Phase 2 requires emailing RMIT IT to do it. **Do NOT fall back to copying SSO credentials onto EC2** as a workaround.
+- **Bucket ownership caveat**: the bucket lives in RMIT's AWS account, not a personal account. RMIT pays the bill and ultimately controls deletion. **If you leave RMIT, you lose access** — keep a personal-archive copy of any artifact load-bearing for thesis/paper submission. The same caveat applies to the EC2 EBS volume in Phase 1, even more so since EBS has no versioning.
+- **Cost discipline**: stop the GPU instance whenever it is not actively training. The dominant cost driver is GPU instance-hours; EBS storage is the next-largest line item in Phase 1. S3 storage cost is negligible (<$2/month at expected volumes) but currently zero since the bucket is dormant. Versioning will be on when activated, so deletes don't free space — old versions persist; revisit a lifecycle rule (expire non-current after N days) if storage grows.
 
 **Portability rule**: code must run on both CPU laptop and GPU EC2. Detect device with `torch.cuda.is_available()`; never assume CUDA.
 
@@ -208,23 +247,51 @@ The Windows 11 laptop is corporate-managed with **Application Control (deny-scri
 5. Walk through the roadmap (next 4–6 weeks)
 6. Ask: scope cuts, paper venue, supervisor's preferred angle
 
-## Next session preview — Session 3
+## Session 3 (completed) — EC2 wiring
 
-**Goal**: connect to the existing EC2 GPU instance and prove the round-trip via S3.
+**Goal**: get the EC2 instance into a usable state for Phase 1 development. **All items closed.**
 
-- Verify SSH/Remote-SSH connection to the existing (currently stopped) GPU instance
-- Install Claude Code on the EC2 instance
-- Sync repo to EC2 via `git clone`
-- Configure AWS SSO on EC2 (or use IAM role attached to the instance, if simpler)
-- Round-trip test: push a small artifact from laptop → S3 → pull on EC2 via `scripts/sync_from_s3.sh`
-- Stop the instance at end of session
+- ✅ SSH alias `mtad-ec2`; raw SSH and VS Code Remote-SSH both verified
+- ✅ Instance identified (`i-0a259946708f10614`, g5.xlarge), pre-installed tooling inventoried
+- ✅ IAM permission check completed — surfaced the gap above; storage strategy revised to Phase 1 (EBS-primary)
+- ✅ `node` and `claude` installed on EC2
+- ✅ Repo cloned to `~/mtad-platform/` on EBS
+- ✅ EBS layout created: `~/mtad-platform/{data,results/runs,results/scores,results/checkpoints}/`
+- ✅ Smoke test (no-op write under `results/`)
+- ✅ Instance stopped at end of session
 
-**Explicitly deferred to Session 4 or later** (do not let scope creep pull these into Session 3):
+**Deferred to Phase 2 (S3 activation), not a Session 3 problem:**
 
-- Converting `TSB-AD/` from gitignored vendor copy to a proper git submodule
-- Scaffolding the `extensions/` directory skeleton
-- `pyproject.toml` and `pip install -e .`
-- First model adapter (MTAD-GAT)
+- Email RMIT IT to provision `mtad-ec2-s3-role` and attach to the instance
+- `scripts/sync_from_s3.sh` / `sync_to_s3.sh` plumbing
+- Round-trip artifact test laptop ↔ S3 ↔ EC2
+
+## Session 4 (completed) — TSB-AD venv + first end-to-end run
+
+**Goal**: prove the benchmark engine works end-to-end on EC2 and that small results flow via git.
+
+- ✅ Python 3.11 venv at `~/mtad-platform/.venv/`
+- ✅ Installed TSB-AD's full `requirements.txt` (16 direct, ~80 transitive, ~5.5 GB venv)
+- ✅ `pip install -e ./TSB-AD` — TSB-AD importable as editable package
+- ✅ All five core models import cleanly: IForest, USAD, TranAD, AnomalyTransformer, OmniAnomaly
+- ✅ PyTorch 2.11 + CUDA 13.0 confirmed; NVIDIA A10G detected
+- ✅ Smoke test: IForest end-to-end via `TSB-AD/benchmark_exp/Run_Detector_M.py` on bundled SMD 057 (preserved the `--file_lsit` typo as documented). Results: AUC-PR 0.10, AUC-ROC 0.80, VUS-PR 0.10, VUS-ROC 0.81, Standard-F1 0.17, PA-F1 0.52, Affiliation-F 0.81
+- ✅ `.gitignore` updated to remove the blanket `results/` exclusion; results CSV + 190 KB score `.npy` committed
+- ✅ `gh` CLI installed on EC2, authenticated via device-code flow; commit pushed from EC2, pulled to laptop (after fixing `safe.directory` ownership)
+- ✅ Instance stopped at end of session
+
+## Next session preview
+
+**Session 5**: Automated website generation from results — leaderboard page and per-model pages, generated from `results/runs/*.csv` and (future) `extensions/models/*.meta.yaml` files. The current Pages site is a static placeholder; Session 5 turns it into something driven by committed results.
+
+**Session 6+** (order TBD per the vertical-slicing rule — one full slice per session, not bulk-import):
+
+- Add metrics extensions in `extensions/metrics/`: operational F1 (fixed-threshold complement to oracle Standard-F1), FLOPs, parameter count, training/inference timing, peak GPU memory.
+- Run additional baselines already in TSB-AD (USAD, TranAD, AnomalyTransformer) on the same SMD 057 starting point to populate the leaderboard.
+- Convert `TSB-AD/` from gitignored vendor copy to a proper git submodule.
+- Scaffold the `extensions/` directory skeleton.
+- `pyproject.toml` and `pip install -e .` for the platform itself (separate from TSB-AD's editable install).
+- First model adapter under `extensions/models/`: MTAD-GAT (the only baseline from the original list not already shipped in TSB-AD).
 
 ---
 
