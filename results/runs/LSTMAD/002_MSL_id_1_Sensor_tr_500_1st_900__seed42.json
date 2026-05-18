@@ -1,0 +1,23 @@
+{
+  "model": "LSTMAD",
+  "file": "002_MSL_id_1_Sensor_tr_500_1st_900.csv",
+  "seed": 42,
+  "timestamp_utc": "2026-05-18T05:31:14+00:00",
+  "git_sha": "8c9ad1570790533d23c4ecd9ea4b5dad807a3f76",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "window_size": 150,
+    "lr": 0.0008
+  },
+  "hp_dropped_keys": [],
+  "status": "error",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/ec2-user/mtad-platform/extensions/runners/run_baseline.py\", line 348, in run_one\n    raise RuntimeError(f\"Model returned non-array: {output!r}\")\nRuntimeError: Model returned non-array: \"An error occurred while running the model 'run_LSTMAD': stack expects a non-empty TensorList\"\n"
+}

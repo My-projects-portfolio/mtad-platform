@@ -1,0 +1,44 @@
+{
+  "model": "LSTMAD",
+  "file": "187_Exathlon_id_14_Facility_tr_6193_1st_6293.csv",
+  "seed": 13,
+  "timestamp_utc": "2026-05-18T06:19:04+00:00",
+  "git_sha": "8c9ad1570790533d23c4ecd9ea4b5dad807a3f76",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "window_size": 150,
+    "lr": 0.0008
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 46660,
+  "n_features": 16,
+  "sliding_window": 125,
+  "train_index": 6193,
+  "wall_time_seconds": 9.099447965621948,
+  "fit_time_seconds": 8.142688035964966,
+  "score_time_seconds": 0.9324514865875244,
+  "infer_per_window_ms": 0.023042268677873932,
+  "peak_gpu_memory_bytes": 77894656,
+  "param_count": 13136,
+  "score_path": "scores/LSTMAD/187_Exathlon_id_14_Facility_tr_6193_1st_6293__seed13.npy",
+  "metrics": {
+    "AUC-PR": 0.9820522398597187,
+    "AUC-ROC": 0.9960951114114796,
+    "VUS-PR": 0.9868147580025524,
+    "VUS-ROC": 0.9977596887801788,
+    "Standard-F1": 0.9541104669272628,
+    "PA-F1": 0.9997422015983501,
+    "Event-based-F1": 0.9993387701124085,
+    "R-based-F1": 0.3567472149360158,
+    "Affiliation-F": 0.9990010872242135
+  }
+}
