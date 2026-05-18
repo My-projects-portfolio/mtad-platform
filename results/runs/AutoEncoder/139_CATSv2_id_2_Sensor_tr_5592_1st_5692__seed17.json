@@ -1,0 +1,46 @@
+{
+  "model": "AutoEncoder",
+  "file": "139_CATSv2_id_2_Sensor_tr_5592_1st_5692.csv",
+  "seed": 17,
+  "timestamp_utc": "2026-05-18T04:48:27+00:00",
+  "git_sha": "1ac6ef92dcd2900b8f5d3b35e6d7924a2e17cd9e",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "hidden_neurons": [
+      128,
+      64
+    ]
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 195000,
+  "n_features": 17,
+  "sliding_window": 125,
+  "train_index": 5592,
+  "wall_time_seconds": 6.9055116176605225,
+  "fit_time_seconds": 5.070556879043579,
+  "score_time_seconds": 1.8878087997436523,
+  "infer_per_window_ms": 0.009966890520694228,
+  "peak_gpu_memory_bytes": 19023872,
+  "param_count": 21713,
+  "score_path": "scores/AutoEncoder/139_CATSv2_id_2_Sensor_tr_5592_1st_5692__seed17.npy",
+  "metrics": {
+    "AUC-PR": 0.04489334891469491,
+    "AUC-ROC": 0.6206276949430611,
+    "VUS-PR": 0.04946092731854177,
+    "VUS-ROC": 0.6013052431736563,
+    "Standard-F1": 0.09762122708051234,
+    "PA-F1": 0.06547651526049236,
+    "Event-based-F1": 0.0654765152604923,
+    "R-based-F1": 0.0034448921644361858,
+    "Affiliation-F": 0.6678865721869601
+  }
+}
