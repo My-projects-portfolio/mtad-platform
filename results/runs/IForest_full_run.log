@@ -1,0 +1,376 @@
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+CUDA available:  True
+cuDNN version:  91900
+Optimal_Det_HP:  {'n_estimators': 25, 'max_features': 0.8}
+Processing:001_Genesis_id_1_Sensor_tr_4055_1st_15538.csv by IForest
+evaluation_result:  {'AUC-PR': 0.018724316842284768, 'AUC-ROC': 0.9071743970315398, 'VUS-PR': 0.11799785551304447, 'VUS-ROC': 0.9544952262667838, 'Standard-F1': 0.05627636081309389, 'PA-F1': 0.12935323383084577, 'Event-based-F1': 0.05561497326203201, 'R-based-F1': 0.11207325049051668, 'Affiliation-F': 0.8517882292817169}
+Processing:002_MSL_id_1_Sensor_tr_500_1st_900.csv by IForest
+evaluation_result:  {'AUC-PR': 0.35859382534445117, 'AUC-ROC': 0.9863586303564277, 'VUS-PR': 0.5857447113543922, 'VUS-ROC': 0.9961960826850129, 'Standard-F1': 0.44443969140885575, 'PA-F1': 0.9565217391304348, 'Event-based-F1': 0.8571428571428567, 'R-based-F1': 0.45544554455445546, 'Affiliation-F': 0.9971138381961411}
+Processing:003_MSL_id_2_Sensor_tr_883_1st_1238.csv by IForest
+evaluation_result:  {'AUC-PR': 0.511315956077278, 'AUC-ROC': 0.8579753738746625, 'VUS-PR': 0.4571054970966131, 'VUS-ROC': 0.8872071301876274, 'Standard-F1': 0.5396177390263837, 'PA-F1': 0.8275862068965517, 'Event-based-F1': 0.6666666666666662, 'R-based-F1': 0.42856908711290687, 'Affiliation-F': 0.8823646152259332}
+Processing:005_MSL_id_4_Sensor_tr_855_1st_2700.csv by IForest
+evaluation_result:  {'AUC-PR': 0.059433962900373505, 'AUC-ROC': 0.8168320576998248, 'VUS-PR': 0.0964855973783582, 'VUS-ROC': 0.8731427637864961, 'Standard-F1': 0.13104705811132494, 'PA-F1': 0.9726027397260274, 'Event-based-F1': 0.33333333333333304, 'R-based-F1': 0.20547945205479454, 'Affiliation-F': 0.849941529528065}
+Processing:006_MSL_id_5_Sensor_tr_1150_1st_1250.csv by IForest
+evaluation_result:  {'AUC-PR': 0.6612324861823152, 'AUC-ROC': 0.8110630742661875, 'VUS-PR': 0.6627188456260671, 'VUS-ROC': 0.8195866746931129, 'Standard-F1': 0.6421968940670658, 'PA-F1': 1.0, 'Event-based-F1': 0.9999999999999996, 'R-based-F1': 0.603307592523021, 'Affiliation-F': 0.9871031250271117}
+Processing:007_MSL_id_6_Sensor_tr_980_1st_3550.csv by IForest
+evaluation_result:  {'AUC-PR': 0.08149773609869448, 'AUC-ROC': 0.7848033353178052, 'VUS-PR': 0.0950941409990335, 'VUS-ROC': 0.8150393257145724, 'Standard-F1': 0.17747749447414873, 'PA-F1': 0.8184281842818428, 'Event-based-F1': 0.1851475076297048, 'R-based-F1': 0.25611745513866235, 'Affiliation-F': 0.7491051049678026}
+Processing:008_MSL_id_7_Sensor_tr_656_1st_1630.csv by IForest
+evaluation_result:  {'AUC-PR': 0.8115113621198633, 'AUC-ROC': 0.9515676725414554, 'VUS-PR': 0.709426202563271, 'VUS-ROC': 0.9344542219539985, 'Standard-F1': 0.7582369997883458, 'PA-F1': 0.950354609929078, 'Event-based-F1': 0.6666666666666662, 'R-based-F1': 0.2724538031800602, 'Affiliation-F': 0.8850531345785925}
+Processing:009_MSL_id_8_Sensor_tr_714_1st_1390.csv by IForest
+evaluation_result:  {'AUC-PR': 0.6909818583927589, 'AUC-ROC': 0.9964810615604267, 'VUS-PR': 0.8925402497305643, 'VUS-ROC': 0.9992559922214849, 'Standard-F1': 0.5945896859426418, 'PA-F1': 1.0, 'Event-based-F1': 0.9999999999999996, 'R-based-F1': 0.6073488218816939, 'Affiliation-F': 0.9989735372906386}
+Processing:010_MSL_id_9_Sensor_tr_554_1st_1172.csv by IForest
+evaluation_result:  {'AUC-PR': 0.028208294842100433, 'AUC-ROC': 0.47935727201576117, 'VUS-PR': 0.04464438918181035, 'VUS-ROC': 0.6066982816046332, 'Standard-F1': 0.06423262008990166, 'PA-F1': 0.3854748603351955, 'Event-based-F1': 0.06338028169014079, 'R-based-F1': 0.08079097579687436, 'Affiliation-F': 0.681830539302907}
+Processing:012_MSL_id_11_Sensor_tr_539_1st_940.csv by IForest
+evaluation_result:  {'AUC-PR': 0.8772795009328036, 'AUC-ROC': 0.994565295945653, 'VUS-PR': 0.9818629206042152, 'VUS-ROC': 0.999292102506409, 'Standard-F1': 0.8820911394032382, 'PA-F1': 1.0, 'Event-based-F1': 0.9999999999999996, 'R-based-F1': 0.5722379603399435, 'Affiliation-F': 0.9982991104543174}
+Processing:013_MSL_id_12_Sensor_tr_554_1st_1200.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0280423669906391, 'AUC-ROC': 0.803437324536777, 'VUS-PR': 0.09974133588631234, 'VUS-ROC': 0.9149392228055303, 'Standard-F1': 0.07972184304489228, 'PA-F1': 0.1780821917808219, 'Event-based-F1': 0.07705192629815737, 'R-based-F1': 0.11278195488721804, 'Affiliation-F': 0.799428485208995}
+Processing:014_MSL_id_13_Sensor_tr_1525_1st_4575.csv by IForest
+evaluation_result:  {'AUC-PR': 0.5519456507413699, 'AUC-ROC': 0.9041447198319112, 'VUS-PR': 0.5617996808105357, 'VUS-ROC': 0.9300208194100394, 'Standard-F1': 0.6014994106821272, 'PA-F1': 1.0, 'Event-based-F1': 0.9999999999999996, 'R-based-F1': 0.6826783114992722, 'Affiliation-F': 0.997280915733816}
+Processing:015_MSL_id_14_Sensor_tr_575_1st_1250.csv by IForest
+evaluation_result:  {'AUC-PR': 0.34926907490091175, 'AUC-ROC': 0.7429696549297877, 'VUS-PR': 0.3521407607352984, 'VUS-ROC': 0.7528429636598069, 'Standard-F1': 0.3944724931634298, 'PA-F1': 1.0, 'Event-based-F1': 0.9999999999999996, 'R-based-F1': 0.37648327939590076, 'Affiliation-F': 0.947326300859583}
+Processing:016_MSL_id_15_Sensor_tr_500_1st_780.csv by IForest
+evaluation_result:  {'AUC-PR': 0.3812384763878455, 'AUC-ROC': 0.8769009509291521, 'VUS-PR': 0.3944412067191456, 'VUS-ROC': 0.8842960906785245, 'Standard-F1': 0.4525217511953392, 'PA-F1': 0.8350515463917526, 'Event-based-F1': 0.6174496644295298, 'R-based-F1': 0.3379721275773068, 'Affiliation-F': 0.9290905613352894}
+Processing:017_MSL_id_16_Sensor_tr_512_1st_1850.csv by IForest
+evaluation_result:  {'AUC-PR': 0.24863022019180342, 'AUC-ROC': 0.8640183018443811, 'VUS-PR': 0.33152160738793973, 'VUS-ROC': 0.8954152526636355, 'Standard-F1': 0.4781997959962682, 'PA-F1': 0.8098434004474273, 'Event-based-F1': 0.47568988173455945, 'R-based-F1': 0.26986333420498493, 'Affiliation-F': 0.8201379420210912}
+Processing:018_Daphnet_id_1_HumanActivity_tr_9693_1st_20732.csv by IForest
+evaluation_result:  {'AUC-PR': 0.13950946105846396, 'AUC-ROC': 0.8199196558262868, 'VUS-PR': 0.14778683850255636, 'VUS-ROC': 0.8273083999859442, 'Standard-F1': 0.28106707844989787, 'PA-F1': 0.6280811657360752, 'Event-based-F1': 0.3066940629393314, 'R-based-F1': 0.28635757380121674, 'Affiliation-F': 0.8090125091734557}
+Processing:019_MITDB_id_1_Medical_tr_37500_1st_103211.csv by IForest
+evaluation_result:  {'AUC-PR': 0.19693625311650267, 'AUC-ROC': 0.6116178179420726, 'VUS-PR': 0.19649754043975282, 'VUS-ROC': 0.6130731054547981, 'Standard-F1': 0.2736138822923552, 'PA-F1': 0.9999462683359304, 'Event-based-F1': 0.6249999999999994, 'R-based-F1': 0.27591317961592265, 'Affiliation-F': 0.8288299881498101}
+Processing:020_MITDB_id_2_Medical_tr_50000_1st_52315.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0021295579245549892, 'AUC-ROC': 0.5806948327115891, 'VUS-PR': 0.002300484789504397, 'VUS-ROC': 0.6054823499665204, 'Standard-F1': 0.005660431722114384, 'PA-F1': 0.17769857433808553, 'Event-based-F1': 0.005635721805908212, 'R-based-F1': 0.006292005482730472, 'Affiliation-F': 0.6666878661119097}
+Processing:021_MITDB_id_3_Medical_tr_50000_1st_57595.csv by IForest
+evaluation_result:  {'AUC-PR': 0.10835428404317314, 'AUC-ROC': 0.6057560403873573, 'VUS-PR': 0.08232290295935525, 'VUS-ROC': 0.6539676955141336, 'Standard-F1': 0.171095844759738, 'PA-F1': 0.9921729827129906, 'Event-based-F1': 0.8522848034006372, 'R-based-F1': 0.3102330739201146, 'Affiliation-F': 0.9617235646656469}
+Processing:022_MITDB_id_4_Medical_tr_50000_1st_54253.csv by IForest
+evaluation_result:  {'AUC-PR': 0.11457697397349019, 'AUC-ROC': 0.5667075209270698, 'VUS-PR': 0.11130889453090659, 'VUS-ROC': 0.597895283901985, 'Standard-F1': 0.17409331156303906, 'PA-F1': 0.863116716689711, 'Event-based-F1': 0.5830399604718667, 'R-based-F1': 0.2158063506342956, 'Affiliation-F': 0.8060211910901974}
+Processing:024_MITDB_id_6_Medical_tr_50000_1st_58118.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0022466414913106286, 'AUC-ROC': 0.5583340928183003, 'VUS-PR': 0.0024989539396404747, 'VUS-ROC': 0.5938796869545336, 'Standard-F1': 0.00650237633948238, 'PA-F1': 0.10142220945266485, 'Event-based-F1': 0.006539603321430101, 'R-based-F1': 0.009905624015769708, 'Affiliation-F': 0.8903124999929795}
+Processing:025_MITDB_id_7_Medical_tr_37500_1st_88864.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0515834272381306, 'AUC-ROC': 0.664527773872016, 'VUS-PR': 0.05746836080543388, 'VUS-ROC': 0.7056631096069171, 'Standard-F1': 0.14138262677370222, 'PA-F1': 0.618008527715074, 'Event-based-F1': 0.1627341439369042, 'R-based-F1': 0.11929466818702716, 'Affiliation-F': 0.8370696625374151}/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+
+Processing:026_MITDB_id_8_Medical_tr_30495_1st_30595.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0891723596410062, 'AUC-ROC': 0.5759776211758182, 'VUS-PR': 0.08974256288829088, 'VUS-ROC': 0.5787585969941574, 'Standard-F1': 0.15562267576993086, 'PA-F1': 0.908715059271184, 'Event-based-F1': 0.2720123552123549, 'R-based-F1': 0.1526523034337312, 'Affiliation-F': 0.8221368579228258}
+Processing:027_MITDB_id_9_Medical_tr_25000_1st_52255.csv by IForest
+evaluation_result:  {'AUC-PR': 0.011090572502320175, 'AUC-ROC': 0.736382346182527, 'VUS-PR': 0.012105832516468932, 'VUS-ROC': 0.7614640007010252, 'Standard-F1': 0.03828572662538629, 'PA-F1': 0.9106203995793901, 'Event-based-F1': 0.06691449814126386, 'R-based-F1': 0.06920848665153057, 'Affiliation-F': 0.7628449999672274}
+Processing:029_MITDB_id_11_Medical_tr_50000_1st_518037.csv by IForest
+evaluation_result:  {'AUC-PR': 0.048180154049861604, 'AUC-ROC': 0.7914917824607487, 'VUS-PR': 0.03354112109802406, 'VUS-ROC': 0.8196639297702666, 'Standard-F1': 0.09675831438309974, 'PA-F1': 0.9943181818181818, 'Event-based-F1': 0.6923076923076917, 'R-based-F1': 0.2551684403172236, 'Affiliation-F': 0.9625769635272939}
+Processing:030_MITDB_id_12_Medical_tr_50000_1st_84572.csv by IForest
+evaluation_result:  {'AUC-PR': 0.06981840560825767, 'AUC-ROC': 0.6273369852718677, 'VUS-PR': 0.0750356975200489, 'VUS-ROC': 0.6537305573248855, 'Standard-F1': 0.12799774845680342, 'PA-F1': 0.6092499893038976, 'Event-based-F1': 0.17808733149080744, 'R-based-F1': 0.12211287378039998, 'Affiliation-F': 0.7415522558754541}
+Processing:031_MITDB_id_13_Medical_tr_50000_1st_79433.csv by IForest
+evaluation_result:  {'AUC-PR': 0.02519739994907839, 'AUC-ROC': 0.5154501949275797, 'VUS-PR': 0.03263715394004702, 'VUS-ROC': 0.593858826706304, 'Standard-F1': 0.052126545726933135, 'PA-F1': 0.5943015983321751, 'Event-based-F1': 0.07759055029950165, 'R-based-F1': 0.12016785925109143, 'Affiliation-F': 0.6860556476820364}
+Processing:032_GHL_id_1_Sensor_tr_50000_1st_65001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.007939058679967498, 'AUC-ROC': 0.41420149689282826, 'VUS-PR': 0.0090789412197222, 'VUS-ROC': 0.40436517100483743, 'Standard-F1': 0.024478055957467177, 'PA-F1': 0.07293639588140087, 'Event-based-F1': 0.023857799405244615, 'R-based-F1': 0.09314573481215857, 'Affiliation-F': 0.66662552738901}
+Processing:033_GHL_id_2_Sensor_tr_50000_1st_51001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.006120810854335686, 'AUC-ROC': 0.28001394397085316, 'VUS-PR': 0.006476676806462468, 'VUS-ROC': 0.2961683153311938, 'Standard-F1': 0.01894048818231408, 'PA-F1': 0.04512086381902796, 'Event-based-F1': 0.01883934536589842, 'R-based-F1': 0.050769570684907436, 'Affiliation-F': 0.67173728321989}
+Processing:034_GHL_id_3_Sensor_tr_50000_1st_122001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.008010242345971127, 'AUC-ROC': 0.43200013244261026, 'VUS-PR': 0.00836551083717085, 'VUS-ROC': 0.44736677435314814, 'Standard-F1': 0.021443284977686695, 'PA-F1': 0.0646748563436294, 'Event-based-F1': 0.02100642562367955, 'R-based-F1': 0.02897786353940653, 'Affiliation-F': 0.6664980651426262}
+Processing:035_GHL_id_4_Sensor_tr_50000_1st_90001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.009021675537324471, 'AUC-ROC': 0.2976451410951896, 'VUS-PR': 0.009528259544555578, 'VUS-ROC': 0.3182123984109883, 'Standard-F1': 0.027358449047889834, 'PA-F1': 0.054686003970933574, 'Event-based-F1': 0.02704588729052643, 'R-based-F1': 0.03829017967094407, 'Affiliation-F': 0.7757335897199222}
+Processing:036_GHL_id_5_Sensor_tr_50000_1st_67147.csv by IForest
+evaluation_result:  {'AUC-PR': 0.006923550201878345, 'AUC-ROC': 0.20658414879079096, 'VUS-PR': 0.0072630513970026, 'VUS-ROC': 0.23331041946609546, 'Standard-F1': 0.023632328267862896, 'PA-F1': 0.10084590410142015, 'Event-based-F1': 0.023513175308591087, 'R-based-F1': 0.045628773887687886, 'Affiliation-F': 0.666745145195154}
+Processing:037_GHL_id_6_Sensor_tr_50000_1st_80001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.009883806426646151, 'AUC-ROC': 0.5591968322723004, 'VUS-PR': 0.010467042757597392, 'VUS-ROC': 0.5762600337635478, 'Standard-F1': 0.025858537128804093, 'PA-F1': 0.12304243183541591, 'Event-based-F1': 0.02557653428365827, 'R-based-F1': 0.03780136127052863, 'Affiliation-F': 0.6800341878944841}
+Processing:038_GHL_id_7_Sensor_tr_50000_1st_100001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.006916042189220699, 'AUC-ROC': 0.40572519892456654, 'VUS-PR': 0.007342214074384959, 'VUS-ROC': 0.4268003027256587, 'Standard-F1': 0.018449126335937104, 'PA-F1': 0.04666079392170897, 'Event-based-F1': 0.018076122477593572, 'R-based-F1': 0.022904121648639402, 'Affiliation-F': 0.6664763539784384}
+Processing:039_GHL_id_8_Sensor_tr_50000_1st_63030.csv by IForest
+evaluation_result:  {'AUC-PR': 0.003752967771655468, 'AUC-ROC': 0.24003326318313936, 'VUS-PR': 0.0038968572641896234, 'VUS-ROC': 0.25969685526097575, 'Standard-F1': 0.011881211015684548, 'PA-F1': 0.05656448254152743, 'Event-based-F1': 0.011783399329112952, 'R-based-F1': 0.02844335189234109, 'Affiliation-F': 0.7651197029841095}
+Processing:041_GHL_id_10_Sensor_tr_50000_1st_57001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.005545289906390111, 'AUC-ROC': 0.16532899329887793, 'VUS-PR': 0.0057640170603857, 'VUS-ROC': 0.1793105793627079, 'Standard-F1': 0.01848751329674466, 'PA-F1': 0.036146624842877687, 'Event-based-F1': 0.018382444022732772, 'R-based-F1': 0.045053703010136066, 'Affiliation-F': 0.7224262634902104}
+Processing:042_GHL_id_11_Sensor_tr_50000_1st_150001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.006511495108828103, 'AUC-ROC': 0.42765462160259154, 'VUS-PR': 0.006742341584584384, 'VUS-ROC': 0.4387889605605637, 'Standard-F1': 0.020134249222516786, 'PA-F1': 0.033484221697602394, 'Event-based-F1': 0.019922308546059912, 'R-based-F1': 0.012945949170743348, 'Affiliation-F': 0.6667064767864933}
+Processing:043_GHL_id_12_Sensor_tr_39938_1st_40038.csv by IForest
+evaluation_result:  {'AUC-PR': 0.022570598785800172, 'AUC-ROC': 0.882040792658125, 'VUS-PR': 0.023645538218054866, 'VUS-ROC': 0.8857432004012904, 'Standard-F1': 0.056853282963654286, 'PA-F1': 0.16957082929977413, 'Event-based-F1': 0.0559221027987655, 'R-based-F1': 0.04663076188899386, 'Affiliation-F': 0.7191965993052121}
+Processing:044_GHL_id_13_Sensor_tr_50000_1st_145001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.013769847723270152, 'AUC-ROC': 0.589762711947306, 'VUS-PR': 0.015014776156530598, 'VUS-ROC': 0.5559447476066328, 'Standard-F1': 0.04168890839806085, 'PA-F1': 0.15004972650422677, 'Event-based-F1': 0.040921192262580675, 'R-based-F1': 0.035331874024903155, 'Affiliation-F': 0.6666823946436296}
+Processing:045_GHL_id_14_Sensor_tr_50000_1st_85076.csv by IForest
+evaluation_result:  {'AUC-PR': 0.02289019122606749, 'AUC-ROC': 0.8162836643538683, 'VUS-PR': 0.02491110891562934, 'VUS-ROC': 0.8176620373715205, 'Standard-F1': 0.0651751400504303, 'PA-F1': 0.2529610097691709, 'Event-based-F1': 0.064464316721653, 'R-based-F1': 0.04988121874498917, 'Affiliation-F': 0.6916062161539884}
+Processing:046_GHL_id_15_Sensor_tr_50000_1st_156462.csv by IForest
+evaluation_result:  {'AUC-PR': 0.16499006768767788, 'AUC-ROC': 0.9833512379482101, 'VUS-PR': 0.16332037297648508, 'VUS-ROC': 0.9836487439038221, 'Standard-F1': 0.31618658797765226, 'PA-F1': 0.5998547567175018, 'Event-based-F1': 0.3258350374914789, 'R-based-F1': 0.2398278189180316, 'Affiliation-F': 0.9364158136040105}
+Processing:047_GHL_id_16_Sensor_tr_50000_1st_77001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.010410320638733761, 'AUC-ROC': 0.3833644144434288, 'VUS-PR': 0.01094620404274794, 'VUS-ROC': 0.4008063432313237, 'Standard-F1': 0.0291128198772478, 'PA-F1': 0.08134669033730661, 'Event-based-F1': 0.028941686956613956, 'R-based-F1': 0.024776091542866165, 'Affiliation-F': 0.7809301585472286}
+Processing:048_GHL_id_17_Sensor_tr_50000_1st_154001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0209666723064861, 'AUC-ROC': 0.5141767936190422, 'VUS-PR': 0.022548748689441078, 'VUS-ROC': 0.5167471022937937, 'Standard-F1': 0.06640099592385967, 'PA-F1': 0.23926247288503255, 'Event-based-F1': 0.07352866500787068, 'R-based-F1': 0.07846864009686251, 'Affiliation-F': 0.8266267479685152}
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+Processing:050_GHL_id_19_Sensor_tr_43750_1st_55001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.057301266131143724, 'AUC-ROC': 0.944219139082634, 'VUS-PR': 0.06379596657465399, 'VUS-ROC': 0.9461840147994014, 'Standard-F1': 0.1602419524056892, 'PA-F1': 0.3358120166567519, 'Event-based-F1': 0.15987153180479954, 'R-based-F1': 0.12495398399898962, 'Affiliation-F': 0.7528266040254564}
+Processing:051_GHL_id_20_Sensor_tr_50000_1st_75110.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0038305899740934796, 'AUC-ROC': 0.22282227870438684, 'VUS-PR': 0.003961290239314027, 'VUS-ROC': 0.23697608721030347, 'Standard-F1': 0.012037478894295217, 'PA-F1': 0.03546754020250149, 'Event-based-F1': 0.01201846666162112, 'R-based-F1': 0.03773654256528685, 'Affiliation-F': 0.6666437379639534}
+Processing:052_GHL_id_21_Sensor_tr_50000_1st_98001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0034523875708058443, 'AUC-ROC': 0.28694875863695873, 'VUS-PR': 0.003518569328272711, 'VUS-ROC': 0.29618966161397436, 'Standard-F1': 0.010867695419911819, 'PA-F1': 0.02042662403231235, 'Event-based-F1': 0.010858078981062648, 'R-based-F1': 0.013121471713638663, 'Affiliation-F': 0.6666613480862618}
+Processing:053_GHL_id_22_Sensor_tr_50000_1st_126448.csv by IForest
+evaluation_result:  {'AUC-PR': 0.025409944855346672, 'AUC-ROC': 0.406902645030223, 'VUS-PR': 0.02654753220932434, 'VUS-ROC': 0.4207733399439158, 'Standard-F1': 0.07305915719985061, 'PA-F1': 0.14576505088839053, 'Event-based-F1': 0.0716127879066441, 'R-based-F1': 0.04121656400299846, 'Affiliation-F': 0.8166753808115091}
+Processing:054_GHL_id_23_Sensor_tr_50000_1st_135001.csv by IForest
+evaluation_result:  {'AUC-PR': 0.036589180855924996, 'AUC-ROC': 0.49356065455568576, 'VUS-PR': 0.027719915602279682, 'VUS-ROC': 0.48827485044090774, 'Standard-F1': 0.16717804763291066, 'PA-F1': 0.22079718345278512, 'Event-based-F1': 0.18776706140886298, 'R-based-F1': 0.10770663913995819, 'Affiliation-F': 0.7250951383241232}
+Processing:055_GHL_id_24_Sensor_tr_50000_1st_118124.csv by IForest
+evaluation_result:  {'AUC-PR': 0.005704562211226261, 'AUC-ROC': 0.5640875328802856, 'VUS-PR': 0.005960112818420173, 'VUS-ROC': 0.5817119054173409, 'Standard-F1': 0.016513943813364775, 'PA-F1': 0.1172029271692415, 'Event-based-F1': 0.016145778154465495, 'R-based-F1': 0.021994560485041333, 'Affiliation-F': 0.7165110327704045}
+Processing:056_GHL_id_25_Sensor_tr_50000_1st_105568.csv by IForest
+evaluation_result:  {'AUC-PR': 0.018490009533895, 'AUC-ROC': 0.6046154713821341, 'VUS-PR': 0.020422440564169118, 'VUS-ROC': 0.577060624046383, 'Standard-F1': 0.046284728917494904, 'PA-F1': 0.10340314136125654, 'Event-based-F1': 0.046260196080149245, 'R-based-F1': 0.04004401803488642, 'Affiliation-F': 0.776728978965865}
+Processing:058_SMD_id_2_Facility_tr_1087_1st_1187.csv by IForest
+evaluation_result:  {'AUC-PR': 0.5189617303644203, 'AUC-ROC': 0.922944544992384, 'VUS-PR': 0.5275088135104158, 'VUS-ROC': 0.9371930273013257, 'Standard-F1': 0.5031186986552408, 'PA-F1': 0.9145454545454546, 'Event-based-F1': 0.705882352941176, 'R-based-F1': 0.2571538579798452, 'Affiliation-F': 0.9143241084349178}
+Processing:059_SMD_id_3_Facility_tr_757_1st_857.csv by IForest
+evaluation_result:  {'AUC-PR': 0.6506257563928214, 'AUC-ROC': 0.909232727722945, 'VUS-PR': 0.2689076743100348, 'VUS-ROC': 0.7606305145407648, 'Standard-F1': 0.7039950289151021, 'PA-F1': 0.8838174273858921, 'Event-based-F1': 0.4615384615384611, 'R-based-F1': 0.2567468852060098, 'Affiliation-F': 0.7058523002533738}
+Processing:060_SMD_id_4_Facility_tr_7176_1st_10609.csv by IForest
+evaluation_result:  {'AUC-PR': 0.03536768238379945, 'AUC-ROC': 0.6979910696457118, 'VUS-PR': 0.049682890837471044, 'VUS-ROC': 0.7566620499377447, 'Standard-F1': 0.08570935130448917, 'PA-F1': 0.8282290279627164, 'Event-based-F1': 0.16666666666666619, 'R-based-F1': 0.0900852376669081, 'Affiliation-F': 0.7581404197480814}
+Processing:061_SMD_id_5_Facility_tr_7176_1st_15144.csv by IForest
+evaluation_result:  {'AUC-PR': 0.4147752672479326, 'AUC-ROC': 0.8423599551288757, 'VUS-PR': 0.3326631268951286, 'VUS-ROC': 0.8450700628882799, 'Standard-F1': 0.4015198608641067, 'PA-F1': 0.7944006999125109, 'Event-based-F1': 0.6577437858508599, 'R-based-F1': 0.3308983053419381, 'Affiliation-F': 0.7700007275534538}
+Processing:063_SMD_id_7_Facility_tr_5923_1st_6506.csv by IForest
+evaluation_result:  {'AUC-PR': 0.16412075844250135, 'AUC-ROC': 0.7053782707751808, 'VUS-PR': 0.12457164960828204, 'VUS-ROC': 0.6779313908360993, 'Standard-F1': 0.24265053258118813, 'PA-F1': 0.8100289296046287, 'Event-based-F1': 0.31638418079096, 'R-based-F1': 0.12064673364803331, 'Affiliation-F': 0.7454137201399037}
+Processing:064_SMD_id_8_Facility_tr_2272_1st_2372.csv by IForest
+evaluation_result:  {'AUC-PR': 0.09652341628096656, 'AUC-ROC': 0.7067424136254102, 'VUS-PR': 0.13458721124069106, 'VUS-ROC': 0.7775967665521031, 'Standard-F1': 0.21569009341273498, 'PA-F1': 0.3879310344827586, 'Event-based-F1': 0.24096385542168636, 'R-based-F1': 0.13897383924927137, 'Affiliation-F': 0.724210352303894}
+Processing:065_SMD_id_9_Facility_tr_737_1st_837.csv by IForest
+evaluation_result:  {'AUC-PR': 0.20695048373552388, 'AUC-ROC': 0.6832574377579075, 'VUS-PR': 0.20271514810320287, 'VUS-ROC': 0.6737484972986572, 'Standard-F1': 0.2726635387968307, 'PA-F1': 0.9032663316582915, 'Event-based-F1': 0.3541255984229789, 'R-based-F1': 0.21916108397874953, 'Affiliation-F': 0.7370471669608742}
+Processing:066_SMD_id_10_Facility_tr_2634_1st_2734.csv by IForest
+evaluation_result:  {'AUC-PR': 0.45860214284518386, 'AUC-ROC': 0.9080830028569923, 'VUS-PR': 0.29107129174235136, 'VUS-ROC': 0.8325074106130829, 'Standard-F1': 0.4816276531599853, 'PA-F1': 0.8916619398752127, 'Event-based-F1': 0.48951781970649844, 'R-based-F1': 0.1773267363107227, 'Affiliation-F': 0.724098975678399}
+Processing:067_SMD_id_11_Facility_tr_1980_1st_2080.csv by IForest
+evaluation_result:  {'AUC-PR': 0.04824378160821063, 'AUC-ROC': 0.4913783619182335, 'VUS-PR': 0.04794657664589474, 'VUS-ROC': 0.3707498373655159, 'Standard-F1': 0.09730029776740634, 'PA-F1': 0.8193832599118943, 'Event-based-F1': 0.10229561014901303, 'R-based-F1': 0.18589973734329165, 'Affiliation-F': 0.675611683790084}
+Processing:068_SMD_id_12_Facility_tr_1099_1st_1199.csv by IForest
+evaluation_result:  {'AUC-PR': 0.3158736096734517, 'AUC-ROC': 0.8754637132139824, 'VUS-PR': 0.19835514668871249, 'VUS-ROC': 0.8881792526471034, 'Standard-F1': 0.41246605113983087, 'PA-F1': 0.6292682926829268, 'Event-based-F1': 0.5531914893617016, 'R-based-F1': 0.22137375329439635, 'Affiliation-F': 0.8421246974810072}
+Processing:069_SMD_id_13_Facility_tr_5925_1st_12760.csv by IForest
+evaluation_result:  {'AUC-PR': 0.0961101068633285, 'AUC-ROC': 0.4167899224799776, 'VUS-PR': 0.0983180344496443, 'VUS-ROC': 0.41130453889665874, 'Standard-F1': 0.21354348887020455, 'PA-F1': 0.7146607710377229, 'Event-based-F1': 0.21348611058761427, 'R-based-F1': 0.49204969397133697, 'Affiliation-F': 0.7366521107609596}
+Processing:070_SMD_id_14_Facility_tr_1070_1st_1170.csv by IForest
+evaluation_result:  {'AUC-PR': 0.06742544837491121, 'AUC-ROC': 0.7717413537281124, 'VUS-PR': 0.04237049938841636, 'VUS-ROC': 0.7535086299922525, 'Standard-F1': 0.11993539835683527, 'PA-F1': 0.47227191413237923, 'Event-based-F1': 0.36363636363636326, 'R-based-F1': 0.10340437623948398, 'Affiliation-F': 0.7681152572382858}
+Processing:071_SMD_id_15_Facility_tr_1109_1st_1209.csv by IForest
+evaluation_result:  {'AUC-PR': 0.4039566485538397, 'AUC-ROC': 0.8298572992941124, 'VUS-PR': 0.14425924716688454, 'VUS-ROC': 0.8288675235643489, 'Standard-F1': 0.528033347921483, 'PA-F1': 0.5773672055427251, 'Event-based-F1': 0.39999999999999963, 'R-based-F1': 0.19654852017492785, 'Affiliation-F': 0.8069493381705815}
+Processing:073_SMD_id_17_Facility_tr_5926_1st_10620.csv by IForest
+evaluation_result:  {'AUC-PR': 0.024289619181400646, 'AUC-ROC': 0.6575040244005762, 'VUS-PR': 0.011975565162938177, 'VUS-ROC': 0.6482629408017142, 'Standard-F1': 0.0983558185663, 'PA-F1': 0.34146341463414637, 'Event-based-F1': 0.19999999999999957, 'R-based-F1': 0.0617283950617284, 'Affiliation-F': 0.684668193511017}
+Processing:074_SMD_id_18_Facility_tr_7174_1st_21230.csv by IForest
+evaluation_result: /home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+ {'AUC-PR': 0.4787363094828697, 'AUC-ROC': 0.9474648584235223, 'VUS-PR': 0.5537314580901469, 'VUS-ROC': 0.970430693202283, 'Standard-F1': 0.573165946649109, 'PA-F1': 0.9253012048192771, 'Event-based-F1': 0.718367346938775, 'R-based-F1': 0.2516484230735468, 'Affiliation-F': 0.9765609668942037}
+Processing:075_SMD_id_19_Facility_tr_564_1st_664.csv by IForest
+evaluation_result:  {'AUC-PR': 0.7306482395502926, 'AUC-ROC': 0.8566175110944365, 'VUS-PR': 0.16722568910276076, 'VUS-ROC': 0.7797601578128451, 'Standard-F1': 0.8042846138418664, 'PA-F1': 0.8448753462603878, 'Event-based-F1': 0.11287520220478073, 'R-based-F1': 0.08986446670595169, 'Affiliation-F': 0.694884556129913}
+Processing:076_SMD_id_20_Facility_tr_5925_1st_17580.csv by IForest
+evaluation_result:  {'AUC-PR': 0.932868005143852, 'AUC-ROC': 0.9996725820009277, 'VUS-PR': 0.8955001604233519, 'VUS-ROC': 0.9995868603656579, 'Standard-F1': 0.9302275786164337, 'PA-F1': 1.0, 'Event-based-F1': 0.9999999999999996, 'R-based-F1': 0.6413196994520084, 'Affiliation-F': 0.9997277705418189}
+Processing:077_SMD_id_21_Facility_tr_3026_1st_3126.csv by IForest
+evaluation_result:  {'AUC-PR': 0.09721375940379846, 'AUC-ROC': 0.7225685326248956, 'VUS-PR': 0.18572634048895867, 'VUS-ROC': 0.8525370020341618, 'Standard-F1': 0.23002796360853256, 'PA-F1': 0.4083582089552239, 'Event-based-F1': 0.25555705240468785, 'R-based-F1': 0.26881683637456816, 'Affiliation-F': 0.817270395922637}
+Processing:078_SMD_id_22_Facility_tr_500_1st_326.csv by IForest
+evaluation_result:  {'AUC-PR': 0.3694509631200385, 'AUC-ROC': 0.8310472864142691, 'VUS-PR': 0.14272862856845003, 'VUS-ROC': 0.5092504293084849, 'Standard-F1': 0.4524937395572198, 'PA-F1': 0.6700443318556049, 'Event-based-F1': 0.29845809621090474, 'R-based-F1': 0.17821716475094754, 'Affiliation-F': 0.6787082340885456}
+Processing:079_LTDB_id_1_Medical_tr_3618_1st_3718.csv by IForest
+evaluation_result:  {'AUC-PR': 0.7770368119890948, 'AUC-ROC': 0.9351043257667231, 'VUS-PR': 0.838903698568039, 'VUS-ROC': 0.9645501276822344, 'Standard-F1': 0.7001429270705591, 'PA-F1': 0.996527894825552, 'Event-based-F1': 0.990177546209671, 'R-based-F1': 0.36053108426708225, 'Affiliation-F': 0.9627085661199102}
+Processing:080_LTDB_id_2_Medical_tr_500_1st_266.csv by IForest
+evaluation_result:  {'AUC-PR': 0.21749381405586116, 'AUC-ROC': 0.5716781790742093, 'VUS-PR': 0.27820780805642836, 'VUS-ROC': 0.6844378883789964, 'Standard-F1': 0.2724803186504096, 'PA-F1': 0.8531679833810708, 'Event-based-F1': 0.495133973291583, 'R-based-F1': 0.26544567160306626, 'Affiliation-F': 0.7847862651290136}
+Processing:081_LTDB_id_3_Medical_tr_500_1st_26.csv by IForest
+evaluation_result:  {'AUC-PR': 0.4191630302134985, 'AUC-ROC': 0.6386014226252332, 'VUS-PR': 0.47761547570710444, 'VUS-ROC': 0.6994185120093119, 'Standard-F1': 0.5140881762132818, 'PA-F1': 0.965455375269511, 'Event-based-F1': 0.6729546417973712, 'R-based-F1': 0.28564078066406595, 'Affiliation-F': 0.829892571280683}
+Processing:083_LTDB_id_5_Medical_tr_15502_1st_15602.csv by IForest
+evaluation_result:  {'AUC-PR': 0.005381407918351221, 'AUC-ROC': 0.515502505474428, 'VUS-PR': 0.005510939122321509, 'VUS-ROC': 0.5248357014557324, 'Standard-F1': 0.012546536262832478, 'PA-F1': 0.36968576709796674, 'Event-based-F1': 0.03124999999999983, 'R-based-F1': 0.025330396475770928, 'Affiliation-F': 0.6746595660401354}
+Processing:084_SVDB_id_1_Medical_tr_12973_1st_13073.csv by IForest
+evaluation_result:  {'AUC-PR': 0.020415692343389545, 'AUC-ROC': 0.5515082542178258, 'VUS-PR': 0.026958218291111856, 'VUS-ROC': 0.6362036267458804, 'Standard-F1': 0.045092038833545935, 'PA-F1': 0.7619271999057604, 'Event-based-F1': 0.10304851867754376, 'R-based-F1': 0.06820236922556372, 'Affiliation-F': 0.6939101351705694}
+Processing:085_SVDB_id_2_Medical_tr_50000_1st_54982.csv by IForest
+evaluation_result:  {'AUC-PR': 0.03958895510963536, 'AUC-ROC': 0.5197499287671982, 'VUS-PR': 0.06139918225141598, 'VUS-ROC': 0.627969191910751, 'Standard-F1': 0.07325988812106522, 'PA-F1': 0.578142391886878, 'Event-based-F1': 0.08656680861201266, 'R-based-F1': 0.06608895668201763, 'Affiliation-F': 0.6784008605370634}
+Processing:086_SVDB_id_3_Medical_tr_533_1st_633.csv by IForest
+evaluation_result:  {'AUC-PR': 0.15063960244745261, 'AUC-ROC': 0.6757575490441065, 'VUS-PR': 0.1878569876582266, 'VUS-ROC': 0.7531940682432906, 'Standard-F1': 0.21908366969479687, 'PA-F1': 0.8645479611086925, 'Event-based-F1': 0.42498264279358083, 'R-based-F1': 0.1991531678538151, 'Affiliation-F': 0.783385675092761}
+Processing:087_SVDB_id_4_Medical_tr_5421_1st_5521.csv by IForest
+evaluation_result:  {'AUC-PR': 0.11046434421464772, 'AUC-ROC': 0.6676985269555292, 'VUS-PR': 0.15662335671944289, 'VUS-ROC': 0.7242196309024325, 'Standard-F1': 0.17024892241545045, 'PA-F1': 0.9132606721162579, 'Event-based-F1': 0.5180025507701359, 'R-based-F1': 0.20005351970286459, 'Affiliation-F': 0.8677520186865778}
+Processing:088_SVDB_id_5_Medical_tr_500_1st_168.csv by IForest
+evaluation_result:  {'AUC-PR': 0.24731418540901667, 'AUC-ROC': 0.6397941099152533, 'VUS-PR': 0.30475685310450357, 'VUS-ROC': 0.7432664228580015, 'Standard-F1': 0.2798393447754438, 'PA-F1': 0.9820129126989268, 'Event-based-F1': 0.8218228457253696, 'R-based-F1': 0.30612116791798816, 'Affiliation-F': 0.8789682828021953}
+Processing:089_SVDB_id_6_Medical_tr_50000_1st_83083.csv by IForest
+evaluation_result:  {'AUC-PR': 0.02297073230878209, 'AUC-ROC': 0.6024455631953917, 'VUS-PR': 0.026380043324146604, 'VUS-ROC': 0.6414768643155171, 'Standard-F1': 0.05280128653982924, 'PA-F1': 0.890165361183638, 'Event-based-F1': 0.1842229570146431, 'R-based-F1': 0.11168660614083638, 'Affiliation-F': 0.7076522712030542}
+Processing:091_SVDB_id_8_Medical_tr_500_1st_126.csv by IForest
+evaluation_result:  {'AUC-PR': 0.2312819448201498, 'AUC-ROC': 0.7280411897505314, 'VUS-PR': 0.25703114604387856, 'VUS-ROC': 0.7796650436925116, 'Standard-F1': 0.273570368791515, 'PA-F1': 0.9444642514329594, 'Event-based-F1': 0.6517651974096506, 'R-based-F1': 0.2538093916078064, 'Affiliation-F': 0.8168936876039714}
+Processing:092_SVDB_id_9_Medical_tr_2674_1st_2774.csv by IForest
+evaluation_result:  {'AUC-PR': 0.09165360652171847, 'AUC-ROC': 0.6411147570969635, 'VUS-PR': 0.09993257972499356, 'VUS-ROC': 0.675613720896569, 'Standard-F1': 0.16552223458279033, 'PA-F1': 0.9412387506617258, 'Event-based-F1': 0.24059492563429552, 'R-based-F1': 0.4701310096432406, 'Affiliation-F': 0.7701887863291512}
+Processing:093_SVDB_id_10_Medical_tr_500_1st_37.csv by IForest
+evaluation_result:  {'AUC-PR': 0.2997064563583208, 'AUC-ROC': 0.794689226494686, 'VUS-PR': 0.3486233627315158, 'VUS-ROC': 0.8570841455715434, 'Standard-F1': 0.3501603319146366, 'PA-F1': 0.9123026333668506, 'Event-based-F1': 0.6564137670553793, 'R-based-F1': 0.25053838725660843, 'Affiliation-F': 0.8333080562066822}
+Processing:094_SVDB_id_11_Medical_tr_20100_1st_23611.csv by IForest
+evaluation_result:  {'AUC-PR': 0.011286131742168904, 'AUC-ROC': 0.5036643949072368, 'VUS-PR': 0.01597226153418503, 'VUS-ROC': 0.6052777702142653, 'Standard-F1': 0.02548549696630603, 'PA-F1': 0.23928133932217233, 'Event-based-F1': 0.02570333171337542, 'R-based-F1': 0.042136951011360925, 'Affiliation-F': 0.7519173480287148}
+Processing:095_SVDB_id_12_Medical_tr_6264_1st_6364.csv by IForest
+evaluation_result:  {'AUC-PR': 0.08848222931154738, 'AUC-ROC': 0.6289178556587175, 'VUS-PR': 0.12115057479163031, 'VUS-ROC': 0.7091106641469543, 'Standard-F1': 0.17039921385999077, 'PA-F1': 0.8216785382471353, 'Event-based-F1': 0.4050069541029203, 'R-based-F1': 0.19173098999267268, 'Affiliation-F': 0.8079720749440511}
+Processing:096_SVDB_id_13_Medical_tr_500_1st_444.csv by IForest
+evaluation_result:  {'AUC-PR': 0.10229763173385843, 'AUC-ROC': 0.6296975612428497, 'VUS-PR': 0.11914136129533068, 'VUS-ROC': 0.7076902881026773, 'Standard-F1': 0.1387618783888832, 'PA-F1': 0.8677645323829422, 'Event-based-F1': 0.6442021803766099, 'R-based-F1': 0.2006112357908596, 'Affiliation-F': 0.8168901290930358}
+Processing:097_SVDB_id_14_Medical_tr_1031_1st_1131.csv by IForest
+evaluation_result:  {'AUC-PR': 0.2518424204942178, 'AUC-ROC': 0.6664540091063734, 'VUS-PR': 0.2958903669706111, 'VUS-ROC': 0.7406241878776322, 'Standard-F1': 0.297964947920116, 'PA-F1': 0.9868259203137535, 'Event-based-F1': 0.7449982049022483, 'R-based-F1': 0.28921700700142955, 'Affiliation-F': 0.9028217934873763}/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/ec2-user/mtad-platform/.venv/lib64/python3.11/site-packages/sklearn/metrics/_classification.py:1833: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])

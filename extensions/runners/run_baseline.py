@@ -128,45 +128,59 @@ def _eagerly_import_tsb_models():
               f"errors (usually optional deps): {preview}{suffix}")
 
 
-def _instrument_basedetector_timing():
-    """Wrap fit / decision_function on every BaseDetector subclass so their
-    cumulative wall time accumulates into _RUN_STATE during a run. Idempotent.
+def _instrument_model_class_timing():
+    """Wrap fit / decision_function on every model class in TSB_AD.models.*
+    that defines both methods directly. This catches both BaseDetector
+    subclasses AND stand-alone model classes (LSTMAD, xLSTMAD, etc.) that
+    don't inherit from BaseDetector but still expose the same interface.
+    Idempotent.
     """
-    def all_subclasses(cls):
-        out = set(cls.__subclasses__())
-        for sub in list(out):
-            out.update(all_subclasses(sub))
-        return out
+    import TSB_AD.models as _models_pkg
 
     wrapped = 0
-    for cls in all_subclasses(_TSBBaseDetector):
-        for method_name in ("fit", "decision_function"):
-            if method_name not in cls.__dict__:
+    for info in pkgutil.iter_modules(_models_pkg.__path__):
+        if info.name.startswith("_") or info.name == "base":
+            continue
+        try:
+            mod = importlib.import_module(f"TSB_AD.models.{info.name}")
+        except Exception:
+            continue
+
+        for attr_name in dir(mod):
+            obj = getattr(mod, attr_name, None)
+            if not inspect.isclass(obj):
                 continue
-            original = cls.__dict__[method_name]
-            if getattr(original, "_timing_wrapped", False):
+            # Only classes DEFINED in this module — skip re-exports
+            if obj.__module__ != mod.__name__:
+                continue
+            # Must have BOTH fit and decision_function directly defined
+            if "fit" not in obj.__dict__ or "decision_function" not in obj.__dict__:
                 continue
 
-            def make_wrapper(orig, name):
-                def wrapper(self, *args, **kwargs):
-                    t0 = time.time()
-                    try:
-                        return orig(self, *args, **kwargs)
-                    finally:
-                        elapsed = time.time() - t0
-                        if name == "fit":
-                            _RUN_STATE["fit_time"] += elapsed
-                        else:
-                            _RUN_STATE["score_time"] += elapsed
-                wrapper._timing_wrapped = True
-                wrapper.__name__ = orig.__name__
-                return wrapper
+            for method_name in ("fit", "decision_function"):
+                original = obj.__dict__[method_name]
+                if getattr(original, "_timing_wrapped", False):
+                    continue
 
-            setattr(cls, method_name, make_wrapper(original, method_name))
-            wrapped += 1
+                def make_wrapper(orig, name):
+                    def wrapper(self, *args, **kwargs):
+                        t0 = time.time()
+                        try:
+                            return orig(self, *args, **kwargs)
+                        finally:
+                            elapsed = time.time() - t0
+                            if name == "fit":
+                                _RUN_STATE["fit_time"] += elapsed
+                            else:
+                                _RUN_STATE["score_time"] += elapsed
+                    wrapper._timing_wrapped = True
+                    wrapper.__name__ = orig.__name__
+                    return wrapper
 
-    print(f"[setup] Instrumented {wrapped} BaseDetector methods for fit/score timing")
+                setattr(obj, method_name, make_wrapper(original, method_name))
+                wrapped += 1
 
+    print(f"[setup] Instrumented {wrapped} model class methods for fit/score timing")
 
 def _hook_nn_module_init():
     """Patch nn.Module.__init__ to register every instance into _RUN_STATE."""
@@ -206,7 +220,7 @@ def _compute_param_count():
 
 # Apply all instrumentation at import time, before the first run_one call.
 _eagerly_import_tsb_models()
-_instrument_basedetector_timing()
+_instrument_model_class_timing()
 _hook_nn_module_init()
 
 

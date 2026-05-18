@@ -19,289 +19,356 @@ Build a **long-term personal multivariate time-series anomaly detection (MTAD) r
 - **Session 1**: GitHub repository + Pages site live (`jekyll-theme-cayman` placeholder, deploy workflow on push to `main`).
 - **Session 2**: AWS S3 bucket `mtad-platform-imanian-2026` provisioned in `ap-southeast-2` with versioning, public-access-block, SSE-S3, and prefix layout seeded. Activation deferred to Phase 2 — see "Storage & sync architecture".
 - **Session 3**: EC2 wired up (`mtad-ec2`, g5.xlarge / A10G). `node` + Claude Code installed on EC2; repo cloned to `~/mtad-platform/` on EBS. IAM permission gap surfaced and documented — Phase 2 will require an RMIT IT request.
-- **Session 4 (2026-05-11)**: Full TSB-AD venv on EC2 (Python 3.11, PyTorch 2.11 + CUDA 13.0; A10G detected). TSB-AD installed editable; all five core models import cleanly (IForest, USAD, TranAD, AnomalyTransformer, OmniAnomaly). First end-to-end smoke test: IForest on the bundled SMD 057 dataset — AUC-ROC 0.80, AUC-PR 0.10, VUS-ROC 0.81, VUS-PR 0.10, Standard-F1 0.17, PA-F1 0.52, Affiliation-F 0.81. Results CSV + scores `.npy` committed to git; `.gitignore` updated to remove the blanket `results/` exclusion. `gh` CLI installed on EC2 and authenticated via device-code flow; commit pushed from EC2, pulled to laptop.
-- **Session 5 (2026-05-11)**: Full TSB-AD-M multivariate dataset downloaded from `https://www.thedatum.org/datasets/TSB-AD-M.zip` to EC2 EBS — 200 CSVs / 2.5 GB at `~/mtad-platform/TSB-AD/Datasets/TSB-AD-M/`. All 180 files referenced by `TSB-AD-M-Eva.csv` present (0 missing); remaining ~20 are the HP-tuning split. Data not committed (gitignored via the bare `TSB-AD/` rule); lives only on EBS per Phase 1 storage strategy. Platform now ready to run any TSB-AD model against the full benchmark — Session 6+ work. See `NOTES.md` §12 for the download record.
+- **Session 4 (2026-05-11)**: Full TSB-AD venv on EC2 (Python 3.11, PyTorch 2.11 + CUDA 13.0; A10G detected). TSB-AD installed editable; all five core models import cleanly. First end-to-end smoke test: IForest on the bundled SMD 057 dataset. Results CSV + scores `.npy` committed to git; `.gitignore` updated to remove the blanket `results/` exclusion. `gh` CLI installed on EC2 and authenticated; commit pushed from EC2, pulled to laptop.
+- **Session 5 (2026-05-11)**: Full TSB-AD-M multivariate dataset downloaded to EC2 EBS — 200 CSVs / 2.5 GB at `~/mtad-platform/TSB-AD/Datasets/TSB-AD-M/`. All 180 files referenced by `TSB-AD-M-Eva.csv` present. Data not committed (gitignored). Platform ready to run any TSB-AD model against the full benchmark.
+- **Session 6 (2026-05-18)**: **Multi-seed runner with cost instrumentation; first three baseline models exercised.** See "Experimental setup" and "Session 6 — what landed" below for detail.
 
-### Known artifacts (post-Session 4)
+### Known artifacts (current)
 
-- `data/smoke_test_list.csv` — file list pointing the runner at one dataset (the input to `--file_lsit`).
-- `results/runs/IForest.csv` — first metrics CSV.
-- `results/scores/IForest/057_SMD_id_1_Facility_tr_4529_1st_4629.npy` — first raw anomaly scores (190 KB).
-- `057_SMD_id_1_Facility_tr_4529_1st_4629.csv` — 5.8 MB, 23,694 rows × 38 features + Label. **Bundled with TSB-AD** under `TSB-AD/Datasets/` (gitignored as part of the vendored upstream); not separately downloaded.
+- `extensions/runners/run_baseline.py` — the multi-seed runner. See "Runner schema" for the full I/O contract.
+- `extensions/configs/dev_subset.csv` — the 10-dataset dev tier (pinned).
+- `results/runs/<Model>/<file_stem>__seed<N>.json` — one JSON sidecar per `(model, dataset, seed)` cell.
+- `results/scores/<Model>/<file_stem>__seed<N>.npy` — one anomaly-score array per cell.
+- `results/runs/<Model>_summary.csv` — flat aggregate, regenerated from successful sidecars on every runner exit.
+- Current cells on disk: IForest (10 × 1 seed), AutoEncoder (10 × 5 seeds = 50), LSTMAD (8 × 1 seed; MSL and SMD error sidecars — see "Known limitations").
 
 ## Key design principle: do NOT modify TSB-AD core in place
 
-`TSB-AD/` is treated as a **vendored upstream** — read-only, pull-able. All extensions live in a parallel top-level `extensions/` folder (to be created) with this layout:
+`TSB-AD/` is treated as a **vendored upstream** — read-only, pull-able. All extensions live in `extensions/`:
 
 ```
 extensions/
-├── models/         # New detectors (MTAD-GAT, our proposed method, ...) — subclass TSB_AD.models.base.BaseDetector
-├── metrics/        # Detection delay, operational F1, peak GPU memory, FLOPs, param count, inference time per window
-├── datasets/       # Loaders for SMD, MSL, SMAP, SWaT in their native formats
-├── configs/        # YAML configs (one per experiment) — Hydra/OmegaConf-style
-├── runners/        # YAML-driven sweep scripts that import TSB-AD's wrappers without forking them
-└── registry.py     # Monkey-patch hook: register new entries into TSB_AD.model_wrapper.Unsupervise_AD_Pool / HP_list dicts at import time
+├── models/         # New detectors (MTAD-GAT, UserMethod, ...) — subclass TSB_AD.models.base.BaseDetector
+├── metrics/        # Detection delay, operational F1, ... (deferred until needed)
+├── datasets/       # Native loaders for SMD, MSL, SMAP, SWaT (deferred until needed)
+├── configs/        # Pinned file lists, run configs
+├── runners/        # run_baseline.py (current) + future analysis utilities
+└── analysis/       # Aggregator, paired stats, plots, LaTeX tables (Session 7+)
 ```
 
-**Why this constraint**: TSB-AD is actively maintained upstream. We need to be able to `git pull` new models, fixes, and the leaderboard schema without merge conflicts in our research code.
+**Why this constraint**: TSB-AD is actively maintained upstream. We need to be able to `git pull` new models and fixes without merge conflicts in our research code.
 
-**Future TSB-AD will be a git submodule.** For now (this initial commit) it is gitignored — we'll convert it to a proper submodule in a later session.
+**Compatibility patches go in `run_baseline.py`, not in TSB-AD.** Two patches currently live there: (a) `__sklearn_tags__` shim on `BaseDetector` for sklearn 1.6+ compatibility; (b) defensive HP-dict filtering against the per-model wrapper signature, since some wrappers (e.g. `run_IForest`) silently fail when handed kwargs they don't accept. Both are documented inline.
 
-## Storage & sync architecture
+**Future TSB-AD will be a git submodule.** For now it is gitignored — we'll convert it in a later session.
 
-**Single source of truth for code** = the GitHub repository (https://github.com/My-projects-portfolio/mtad-platform). Every machine — dev laptop, EC2 GPU instance, future collaborator — must be reproducible from `git clone` plus the data-restore path described below.
+---
 
-**Hard rule: any single file >5 MB does NOT go in git.** No exceptions.
+## Experimental setup
 
-### Phase 1 (current, as of 2026-05-11): EC2 EBS is the primary data store, git carries small results
+This section is load-bearing — it pins the scope of every sweep until a paper-submission phase says otherwise.
 
-Datasets and large artifacts (checkpoints, large score arrays) live on the EC2 instance's EBS volume. **Small results — per-run CSVs and small `.npy` score files — travel via git** to GitHub and the laptop, so the leaderboard and analysis tooling have a live copy without an scp step. The S3 bucket exists but is dormant — activated in Phase 2 below. Reasons for this layout: (i) avoids the RMIT IT IAM-creation request that's currently blocked (see "Hardware & AWS context"), (ii) keeps the workflow simple while there's only one machine, (iii) lets the laptop render results from a plain `git pull`.
+### Dev subset (10 datasets)
 
-What goes where (updated post-Session 4):
+The runner operates on a curated 10-dataset development tier pinned at `extensions/configs/dev_subset.csv`. One file per source family, chosen to span domains and dimensionality:
 
-| Artifact | Lives in | Notes |
-|---|---|---|
-| Code, configs (YAML), metadata YAMLs, leaderboard sources, website source | git | text, small |
-| Per-run metrics CSVs (`results/runs/*.csv`) | git | one row per run |
-| Small anomaly score arrays (`results/scores/<Model>/*.npy`, well under 5 MB) | git | committed since Session 4 — `.gitignore` no longer blanket-excludes `results/` |
-| Large anomaly score arrays (≥ ~50 MB, expected once heavier models run) | EC2 EBS only — `~/mtad-platform/results/scores/` | exclude case-by-case in `.gitignore` when they appear; still bound by the 5 MB hard rule above for git |
-| Model checkpoints (`*.pt`, `*.ckpt`) | EC2 EBS — `~/mtad-platform/results/checkpoints/` | always large; never in git |
-| Datasets (TSB-AD-bundled CSVs, plus future SMD/MSL/SMAP/SWaT native) | EC2 EBS only — `TSB-AD/Datasets/` (gitignored as part of vendored upstream) and `~/mtad-platform/data/` | downloaded once per machine; never committed |
+| Dataset | Channels | Train idx | Role |
+|---|---|---|---|
+| 002_MSL  | 55  | 500   | Canonical anchor — NASA Mars Science Lab |
+| 027_MITDB | 2  | 25000 | Diversity — ECG, low-dim |
+| 078_SMD | 38   | 500   | Canonical anchor — server monitoring |
+| 115_PSM | 25   | 50000 | Canonical anchor — eBay server metrics |
+| 132_OPPORTUNITY | 248 | 895 | Diversity — high-dim activity recognition |
+| 139_CATSv2 | 17 | 5592  | Diversity — simulated dynamics |
+| 166_SMAP | 25  | 1113  | Canonical anchor — NASA satellite |
+| 171_SWaT | 66  | 3749  | Canonical anchor — water-treatment ICS |
+| 173_GECCO | 9  | 16165 | Diversity — water quality |
+| 187_Exathlon | 16 | 6193 | Diversity — Spark cluster traces |
 
-**Workflow (current, as exercised in Session 4):** SSH into EC2 via VS Code Remote-SSH and work there. Code + small results: `git commit`/`git push` from EC2, `git pull` on the laptop. Large artifacts (checkpoints, oversized scores): stay on EBS; `tar` + `scp` to laptop at paper-writing milestones. The laptop is a viewing window plus a local copy of code and lightweight results.
+**Reporting tier (deferred until paper submission)**: the full 180-file `TSB-AD-M-Eva.csv` split, run only for the proposed method plus 3–5 key baselines near submission. The dev tier is for iteration and ablations; the reporting tier is for headline numbers.
 
-**EBS durability — load-bearing risk to manage:** EBS has no versioning, no cross-AZ durability, and dies with the instance if the volume is set to delete-on-termination. Because EBS is the *only* copy of large artifacts in Phase 1, the backup cadence is mandatory, not optional:
+### Baseline canonical list (10 models)
 
-- **Weekly:** `tar` of `~/mtad-platform/results/` and `~/mtad-platform/data/` pulled to the laptop via `scp`.
-- **Monthly:** EBS snapshot via `aws ec2 create-snapshot` (or AWS console).
-- **Cost discipline:** stop the GPU instance whenever not actively training, even for short breaks. Light dev ~$30–50/month; heavy training ~$200–400/month. Track spending via the AWS Billing Dashboard weekly. EBS keeps charging while the instance is stopped, but at a much lower rate than GPU instance-hours.
+The platform reports on these as its default baseline set:
 
-### Phase 2 (deferred): S3 activation
+- **Classical (3)**: IForest, OCSVM, LOF — universal baselines, non-trivial to beat
+- **Reconstruction (3)**: AutoEncoder, OmniAnomaly, USAD — most-cited MTAD paradigm
+- **Forecasting (1)**: LSTMAD — predict-and-residual approach
+- **Transformer (2)**: AnomalyTransformer, TranAD — self-attention based
+- **Recent SOTA (1)**: TimesNet — periodicity decomposition (ICLR 2023)
 
-Trigger conditions: (a) a collaborator joins, (b) results need to flow between multiple machines, (c) load-bearing artifacts approach paper submission and need offsite/versioned durability.
+Plus the user's own proposed method, slotted in `extensions/models/UserMethod.py` (off the public repo until publish).
 
-When triggered, the migration is:
+DCdetector and MTAD-GAT are candidates for later additions but require new adapters (they're not in TSB-AD). Foundation models (Chronos, MOMENT, TimesFM) are deferred.
 
-1. Email RMIT IT to provision an IAM instance profile granting S3 access scoped to bucket `mtad-platform-imanian-2026` (the role-creation actions are denied to my SSO user — see "Hardware & AWS context"). Draft of the email lives in session notes.
-2. `scripts/sync_from_s3.sh {datasets|scores|checkpoints|exports|all}` pulls; `scripts/sync_to_s3.sh ...` pushes. Both `--dry-run`-aware, idempotent (`aws s3 sync` only transfers changed files). Defaults: `MTAD_S3_BUCKET=mtad-platform-imanian-2026`, `AWS_PROFILE=mtad`. `*.sh` files are kept LF-only via `.gitattributes` so they run on Linux/EC2 even when authored on Windows.
-3. Bootstrap on a fresh machine becomes `git clone` → `scripts/sync_from_s3.sh datasets`.
+### Multi-seed protocol
 
-The bucket is already created with versioning on, all four public-access-block flags on, SSE-S3 encryption, and prefixes `datasets/ scores/ checkpoints/ exports/` seeded — so Phase 2 activation is purely about turning it on, not provisioning.
+- **Canonical seed list**: `[13, 17, 42, 1337, 2024]`
+- **5 seeds** for stochastic deep models (AE, USAD, LSTMAD, OmniAnomaly, TranAD, AnomalyTransformer, TimesNet, UserMethod) — gives mean ± std and enables paired Wilcoxon comparisons.
+- **1 seed** for deterministic classical models (IForest, LOF, OCSVM). TSB-AD's stock wrappers for these don't forward `random_state` to the underlying class, so additional seeds would produce identical numbers. Running 1 seed is honest, not wasteful.
 
-### Caching invariant (applies in both phases)
+### Runner schema
 
-**Experiments are immutable once computed.** Never re-run an experiment we already have. Only add new `(model × dataset × seed)` rows.
+`extensions/runners/run_baseline.py` is the single entry point. For each `(model, file, seed)` cell it writes three artifacts:
 
-- Each experiment gets a deterministic `run_id = hash(model_name + model_version + dataset_id + seed + hyperparams + git_sha)`.
-- Layout (Phase 1):
-  - `results/runs/<Model>.csv` (or `<run_id>.json` once the schema firms up) — small, committed to git: config, metrics, environment, timings.
-  - `results/scores/<Model>/<dataset>.npy` — committed to git when small; EBS-only when large.
-- **Adding a new metric never requires re-training.** New metrics recompute from cached score arrays (in git when small, on EBS when large).
+1. **JSON sidecar** at `results/runs/<Model>/<file_stem>__seed<N>.json`. Schema:
+   ```
+   model, file, seed, timestamp_utc, git_sha
+   env: {python, platform, torch, numpy, cuda_available, cuda_version, gpu_name}
+   hp, hp_dropped_keys
+   status: "success" | "error"
+   traceback (only when status=error)
+   On success, additionally:
+     n_samples, n_features, sliding_window, train_index
+     wall_time_seconds
+     fit_time_seconds, score_time_seconds       # split via class-method wrapping
+     infer_per_window_ms                        # derived: score_time / n_test_windows
+                                                # null for unsupervised (TSB-AD reads
+                                                # decision_scores_ rather than calling
+                                                # decision_function)
+     peak_gpu_memory_bytes                      # torch.cuda.max_memory_allocated
+     param_count                                # sum of trainable params across
+                                                # top-level nn.Module instances
+                                                # created during the run; 0 for sklearn
+     score_path                                 # relative path to the .npy
+     metrics: {all 9 TSB-AD detection metrics}
+   ```
 
-## Coding conventions
+2. **Score `.npy`** at `results/scores/<Model>/<file_stem>__seed<N>.npy` — the raw `(n_samples,)` anomaly-score array. This is the **backfill currency**: any future detection metric (operational F1, detection delay, ROC-K) can be recomputed from these arrays without re-running.
 
-- **Python 3.10+** (use `match`, `|` union types, `pathlib.Path` everywhere)
-- **Type hints everywhere** in `extensions/` code — `def fit(self, X: np.ndarray, y: np.ndarray | None = None) -> "MyDetector":`
-- **Docstrings everywhere** in `extensions/` — short Google-style is fine; describe shapes (`(n, d)`) and units
-- **No hardcoded paths** — all paths come from a YAML config or `pathlib.Path` derived from a project root sentinel
-- **All configs in YAML** — argparse only for `--config path/to/config.yaml` and minor overrides; Hydra/OmegaConf preferred once we add it
-- **Reproducibility** — every run logs git SHA, config YAML, seed, environment (CPU/GPU model, RAM, package versions) into the results directory
-- **Preserve the `--file_lsit` typo** when calling TSB-AD's runner scripts. Do not "correct" it — argparse depends on the literal misspelling. Document this fact in any wrapper or runner that calls the upstream scripts.
+3. **Summary CSV** at `results/runs/<Model>_summary.csv` — regenerated on every runner exit from successful sidecars only.
 
-## Vertical-slicing rule when adding a model/dataset/metric
+**Resume behaviour**: success sidecars are skipped; error sidecars are retried; `--force` re-runs everything (must be passed from `main()` through to `run_one()` — this propagation is wired correctly as of the Session 6 fix).
 
-When adding a new **model** to the platform, the unit of work is one full vertical slice — completed and committed in one session, not deferred:
+**Instrumentation hooks** that make the schema work:
+- `torch.nn.Module.__init__` is patched at import time to register every module instance into a per-run list; `param_count` is computed post-run as the sum of trainable params across "root" modules (those not contained as sub-modules of any other captured module). Handles multi-network architectures like USAD.
+- Every class in every `TSB_AD.models.*` module that defines both `fit` and `decision_function` is method-wrapped at import time to accumulate fit / score timing into a per-run dict. This catches both `BaseDetector` subclasses **and** stand-alone classes (LSTMAD, xLSTMAD) that don't inherit from `BaseDetector`.
 
-1. `extensions/models/<ModelName>.py` — the adapter (subclass `BaseDetector` + a `run_<ModelName>_(Un|Semi)supervised` wrapper).
-2. `extensions/models/<ModelName>.meta.yaml` — metadata (see "Public website plan" below for required fields).
-3. The model's website page is generated from the meta YAML and committed under `docs/`.
-4. The leaderboard is regenerated and committed.
-5. Everything pushed in one commit (or one short series).
+### Metrics captured per cell
 
-**Same rule applies to datasets and metrics.** Never leave a model "partially added" — half-finished slices accumulate as silent rot and break the website's auto-generation.
+**Detection (9, all from TSB-AD's `get_metrics`):** AUC-PR, AUC-ROC, VUS-PR, VUS-ROC, Standard-F1, PA-F1, Event-based-F1, R-based-F1, Affiliation-F.
 
-## Always present a plan before large multi-file changes
+**Cost (added by platform):** wall_time, fit_time, score_time, infer_per_window_ms, peak_gpu_memory_bytes, param_count.
 
-For any change that touches more than ~3 files or introduces a new abstraction, **write a short plan first** (use the `Plan` agent or `ExitPlanMode`) and get explicit user approval before editing. Bug fixes and one-file tweaks don't need this. The user has been burned by half-finished refactors and prefers the alignment cost.
-
-## Models to add beyond TSB-AD's defaults
-
-The user's original list was USAD, TranAD, OmniAnomaly, AnomalyTransformer, MTAD-GAT, plus a slot for the proposed method. **Investigation found that 4 of those 5 are already in TSB-AD** (`TSB_AD/models/{USAD,TranAD,OmniAnomaly,AnomalyTransformer}.py`). For the four already-present models, our work is to **wrap and configure** them via YAML rather than reimplement.
-
-**Priority order:**
-
-1. **MTAD-GAT** — graph-attention-based MTAD (Zhao et al. 2020). The only genuinely missing baseline from the original list.
-2. **`<UserMethod>`** — placeholder slot for the user's own proposed method (file: `extensions/models/UserMethod.py`).
-3. **Newer baselines as relevance demands** — decided per session, not all up front. Candidate pool to pull from:
-   - **DCdetector** — dual-attention contrastive method
-   - **TimesNet (anomaly variant)** — period-decomposition deep model
-   - **ModernTCN** — modern temporal convolutional network
-   - **Foundation models** — Chronos, MOMENT, TimesFM (TSB-AD already has stubs for several; verify what works MV)
-
-Add a model only when a specific paper or experiment needs it. Do not bulk-import — the vertical-slicing rule (above) applies to each.
-
-## Metrics to ensure are included
-
-TSB-AD ships: `AUC-ROC, AUC-PR, VUS-ROC, VUS-PR, Standard-F1 (oracle), PA-F1 (oracle), Event-based-F1, R-based-F1, Affiliation-F`. Our additions live in `extensions/metrics/`:
-
-- **Point F1 — operational** (fixed threshold, e.g. contamination percentile) and **point F1 — oracle** (already exists as `Standard-F1`). Report both, never just one.
-- **PA-F1** — operational and oracle, same reasoning
-- **Detection delay** (median + p95 number of timesteps from anomaly start to first alert)
-- **Training time** (fit only, separated from scoring)
-- **Inference time per window** (per-sample throughput)
-- **Peak GPU memory** (`torch.cuda.max_memory_allocated`)
-- **Parameter count** (sum of `numel()` for trainable params)
-- **FLOPs** (per inference forward pass; use `fvcore` or `thop`)
+**Reproducibility (added by platform):** git_sha, env, hp (with dropped keys), seed, timestamp_utc.
 
 ### Metric philosophy: dual-reporting is a methodological contribution
 
 TSB-AD's `Standard-F1` and `PA-F1` are **oracle** F1 — they sweep all thresholds and report the best. This is an upper bound, not what a deployed system actually achieves. Many MTAD papers report only oracle numbers, which inflates results.
 
-**We always report BOTH operational AND oracle versions** of point-F1 and PA-F1 in every table and figure. Reviewers see the deployment-realistic number alongside the theoretical ceiling. This dual-reporting is itself worth highlighting as a methodological contribution in any paper produced from this platform — it directly addresses the "Elephant in the Room" critique that motivates TSB-AD itself.
+**We always report BOTH operational AND oracle versions** of point-F1 and PA-F1 in every table and figure. The dual-reporting is itself worth highlighting as a methodological contribution in any paper produced from this platform — it directly addresses the "Elephant in the Room" critique that motivates TSB-AD itself.
+
+**Operational F1 is currently NOT in the captured metrics list — it's backfillable from saved score arrays**, to be added as a Session 7+ task (see "Analysis utilities, pending").
+
+### Deferred / not in instrumentation
+
+- **FLOPs**: deferred indefinitely. Decision rationale: most recent MTAD papers (TranAD, AnomalyTransformer, DCdetector, OmniAnomaly, TSB-AD itself) don't report FLOPs; the engineering cost (~3–4 hours plus per-model failure handling for thop edge cases) outweighs the marginal table-strengthening value for non-efficiency papers. If a future paper specifically needs it, re-run the deep models with `thop.profile` instrumentation — known cost (~1 day of engineering plus a sweep), not a catastrophe.
+- **Operational F1, detection delay, ROC-K, P@K**: backfillable from saved scores. Build when a specific paper needs them.
+
+---
+
+## Known limitations
+
+### Deep models on small-train datasets
+
+LSTMAD fails on `002_MSL` and `078_SMD` (both with `train_index=500`) with `RuntimeError: stack expects a non-empty TensorList`. Root cause: LSTMAD's wrapper splits 20% of training data for validation, leaving 100 samples; with `window_size + pred_len ≈ 100`, the validation `ForecastDataset` produces zero windows, the DataLoader is empty, and `torch.stack([])` fires.
+
+**Expected to affect other windowed deep models**: USAD, OmniAnomaly, TranAD, AnomalyTransformer, TimesNet probably hit the same wall on the same two datasets. Verify on each model's smoke test.
+
+**Behaviour by design**: error sidecars are still written (with traceback); `<Model>_summary.csv` excludes error cells naturally. For paper tables, per-dataset bar charts handle the gap cleanly (no bar for affected `(model, dataset)` cells). Document the exclusion in the methodology section if a reviewer asks.
+
+---
+
+## Storage & sync architecture
+
+**Single source of truth for code** = the GitHub repository (https://github.com/My-projects-portfolio/mtad-platform). Every machine must be reproducible from `git clone` plus the data-restore path.
+
+**Hard rule: any single file >5 MB does NOT go in git.** No exceptions.
+
+### Phase 1 (current): EC2 EBS is the primary data store, git carries small results
+
+Datasets and large artifacts live on the EC2 instance's EBS volume. Small results — JSON sidecars, summary CSVs, small `.npy` score files — travel via git to GitHub and the laptop, so the leaderboard and analysis tooling have a live copy without an scp step. The S3 bucket exists but is dormant — activated in Phase 2.
+
+| Artifact | Lives in | Notes |
+|---|---|---|
+| Code, configs (YAML), website source | git | text, small |
+| JSON sidecars (`results/runs/<Model>/*.json`) | git | one per cell |
+| Summary CSVs (`results/runs/<Model>_summary.csv`) | git | regenerated, small |
+| Small anomaly score arrays (`results/scores/<Model>/*.npy`) | git | committed when <5 MB |
+| Large score arrays (≥ ~5 MB per cell, expected on long datasets) | EC2 EBS only | exclude case-by-case in `.gitignore` |
+| Model checkpoints (`*.pt`, `*.ckpt`) | EC2 EBS only — `~/mtad-platform/results/checkpoints/` | always large; never in git |
+| Datasets (TSB-AD bundled, future native SMD/MSL/SMAP/SWaT) | EC2 EBS only | downloaded once per machine |
+
+**Workflow (current):** SSH into EC2 via VS Code Remote-SSH and work there. Code + small results: `git commit`/`git push` from EC2, `git pull` on the laptop. Large artifacts stay on EBS; `tar` + `scp` to laptop at paper-writing milestones.
+
+**EBS durability — load-bearing risk to manage:** EBS has no versioning. Because EBS is the *only* copy of large artifacts in Phase 1, the backup cadence is mandatory:
+
+- **Weekly:** `tar` of `~/mtad-platform/results/` and `~/mtad-platform/data/` pulled to the laptop via `scp`.
+- **Monthly:** EBS snapshot via `aws ec2 create-snapshot` (or AWS console).
+- **Cost discipline:** stop the GPU instance whenever not actively training. Light dev ~$30–50/month; heavy training ~$200–400/month.
+
+### Phase 2 (deferred): S3 activation
+
+Trigger conditions: (a) a collaborator joins, (b) results need to flow between multiple machines, (c) artifacts approach paper submission and need offsite/versioned durability.
+
+Migration steps: (1) email RMIT IT to provision an IAM instance profile scoped to bucket `mtad-platform-imanian-2026` — the role-creation actions are denied to my SSO user; (2) `scripts/sync_from_s3.sh` / `sync_to_s3.sh` for pull/push; (3) bootstrap on a fresh machine becomes `git clone` → `sync_from_s3.sh datasets`.
+
+### Caching invariant (applies in both phases)
+
+**Experiments are immutable once computed.** Never re-run an experiment we already have. Only add new `(model × dataset × seed)` rows.
+
+- Each cell is uniquely identified by its `<file_stem>__seed<N>.json` sidecar path.
+- Resume logic skips success sidecars and retries error sidecars; `--force` re-runs everything.
+- **Adding a new detection metric never requires re-training.** New metrics recompute from cached score arrays.
+
+---
+
+## Coding conventions
+
+- **Python 3.11+** on EC2 (3.11.14 in the venv). Laptop runs whatever's locally installed; no laptop runs are load-bearing.
+- **Type hints** in `extensions/` code where they aid clarity. Pragmatism beats dogma — don't fight typing for inscrutable TSB-AD interop.
+- **No hardcoded paths** — paths come from CLI args or `pathlib.Path` derived from the project root.
+- **Reproducibility** — every run logs git SHA, env, seed, and HP into the JSON sidecar. This is automatic via `run_baseline.py`.
+- **Preserve the `--file_lsit` typo** when calling TSB-AD's upstream runner scripts. Do not "correct" it. Our `run_baseline.py` uses `--file_list` (corrected) because it's our code, not TSB-AD's.
+
+---
+
+## Vertical-slicing rule when adding a model/dataset/metric
+
+When adding a new **model**, the unit of work is one full vertical slice — completed and committed in one session:
+
+1. `extensions/models/<ModelName>.py` — the adapter (if it needs one beyond TSB-AD's existing wrapper).
+2. `extensions/models/<ModelName>.meta.yaml` — metadata for the website.
+3. Smoke test: single seed × 10 datasets on the dev subset, verify the JSON sidecars populate cleanly (`fit_time > 0`, `param_count` sensible, etc.).
+4. Full 5-seed sweep on the dev subset.
+5. Commit results + sidecars + summary CSV in one commit.
+
+**Same rule applies to datasets and metrics.** Never leave a model "partially added" — half-finished slices accumulate as silent rot.
+
+## Always present a plan before large multi-file changes
+
+For any change that touches more than ~3 files or introduces a new abstraction, **write a short plan first** and get explicit user approval before editing. Bug fixes and one-file tweaks don't need this. The user has been burned by half-finished refactors and prefers the alignment cost.
+
+---
 
 ## Datasets to focus on
 
-- **TSB-AD-M curated set** — primary benchmark (the eval split via `Datasets/File_List/TSB-AD-M-Eva.csv`)
-- **SMD, MSL, SMAP, SWaT** in their **native formats** — for direct comparison against papers that don't report on TSB-AD. Loaders go in `extensions/datasets/` and convert to TSB-AD's CSV-with-trailing-Label-column format on the fly so they reuse TSB-AD's existing pipeline.
+- **TSB-AD-M curated set** — primary benchmark. Dev tier = the 10 files pinned in `extensions/configs/dev_subset.csv`. Reporting tier = the full 180 in `Datasets/File_List/TSB-AD-M-Eva.csv`.
+- **SMD, MSL, SMAP, SWaT** in their **native formats** — for direct comparison against papers that don't report on TSB-AD. Loaders will go in `extensions/datasets/` when needed; deferred until a specific paper requires it.
 
 ## Hardware & AWS context
 
-**Development laptop**: Windows 11 (corporate-managed), CPU-only. Quick iteration, classical models, smoke tests, code authoring. See "Application Control constraint" below for environment caveats.
+**Development laptop**: Windows 11 (corporate-managed), CPU-only. Quick iteration, smoke tests, code authoring. See "Application Control constraint" below.
 
-**Training**: AWS EC2 GPU. Instance `i-0a259946708f10614` ("Nafis-EC2-GPU", g5.xlarge, NVIDIA A10G, Amazon Linux 2023, user `ec2-user`) — provisioned, kept stopped between sessions, only start when actively training. Pre-installed: `aws-cli` 2.33.27, `git` 2.50.1, `tmux` 3.2a. Missing (install in-session as needed): `node`, `claude`. SSH alias `mtad-ec2`; VS Code Remote-SSH verified working.
+**Training**: AWS EC2 GPU. Instance `i-0a259946708f10614` ("Nafis-EC2-GPU", g5.xlarge, NVIDIA A10G, Amazon Linux 2023, user `ec2-user`) — kept stopped between sessions, started only when training. SSH alias `mtad-ec2`; VS Code Remote-SSH verified working.
 
 **AWS account context:**
 
-- **Account type**: RMIT-managed (institutional), account ID `430442692195`. SSO portal: `https://rmit-research.awsapps.com/start`. Policy restrictions are possible — assume any new resource may need IT approval.
-- **Auth**: SSO only (no long-lived access keys). Local profile `mtad` aliases the `RMIT-ResearchAdmin` role on the same account, sharing the `aws-rmit` SSO session. Refresh creds with `aws sso login --profile mtad` (loopback OAuth flow; opens the RMIT SSO page, redirects to `127.0.0.1`). Temp creds last ~hours; re-login when expired.
-- **Region**: `ap-southeast-2` (Sydney). **Keep all resources in this region** — cross-region data transfer is both billed and slow.
-- **S3 bucket**: `mtad-platform-imanian-2026` in `ap-southeast-2`. Versioning **enabled**, all four public-access-block flags **on**, server-side encryption SSE-S3 (AES-256, default). Bucket layout: `datasets/`, `scores/`, `checkpoints/`, `exports/` (each seeded with a `.keep` marker so the prefixes show up in the AWS console). **Status: dormant in Phase 1.** See "Storage & sync architecture" for activation criteria.
-- **IAM permission gap (verified 2026-05-09)**: the `RMIT-ResearchAdmin` SSO role has `implicitDeny` on `iam:CreateRole`, `iam:PutRolePolicy`, `iam:CreateInstanceProfile`, `iam:AddRoleToInstanceProfile`, `iam:PassRole`, and `ec2:AssociateIamInstanceProfile` (all six checked via `simulate-principal-policy`). No permissions boundary on the role. Account is in AWS Organization `o-2vvrr6u1ue` (master `538238080661` = RMIT IT) with SCPs **enabled** but not introspectable from this account. Implication: I cannot create or attach an EC2 IAM instance profile myself — Phase 2 requires emailing RMIT IT to do it. **Do NOT fall back to copying SSO credentials onto EC2** as a workaround.
-- **Bucket ownership caveat**: the bucket lives in RMIT's AWS account, not a personal account. RMIT pays the bill and ultimately controls deletion. **If you leave RMIT, you lose access** — keep a personal-archive copy of any artifact load-bearing for thesis/paper submission. The same caveat applies to the EC2 EBS volume in Phase 1, even more so since EBS has no versioning.
-- **Cost discipline**: stop the GPU instance whenever it is not actively training. The dominant cost driver is GPU instance-hours; EBS storage is the next-largest line item in Phase 1. S3 storage cost is negligible (<$2/month at expected volumes) but currently zero since the bucket is dormant. Versioning will be on when activated, so deletes don't free space — old versions persist; revisit a lifecycle rule (expire non-current after N days) if storage grows.
+- **Account type**: RMIT-managed, account ID `430442692195`. SSO portal: `https://rmit-research.awsapps.com/start`. Assume any new resource may need IT approval.
+- **Auth**: SSO only. Local profile `mtad` aliases the `RMIT-ResearchAdmin` role. Refresh creds with `aws sso login --profile mtad`.
+- **Region**: `ap-southeast-2` (Sydney). Keep all resources in this region.
+- **S3 bucket**: `mtad-platform-imanian-2026`, dormant in Phase 1.
+- **IAM permission gap (verified 2026-05-09)**: the `RMIT-ResearchAdmin` SSO role cannot create EC2 instance profiles. Phase 2 requires emailing RMIT IT. **Do NOT fall back to copying SSO credentials onto EC2** as a workaround.
+- **Bucket ownership caveat**: the bucket lives in RMIT's AWS account. If you leave RMIT, you lose access — keep a personal-archive copy of any artifact load-bearing for thesis/paper submission.
+- **Cost discipline**: stop the GPU instance whenever not actively training.
 
 **Portability rule**: code must run on both CPU laptop and GPU EC2. Detect device with `torch.cuda.is_available()`; never assume CUDA.
 
 ## Application Control constraint on dev laptop
 
-The Windows 11 laptop is corporate-managed with **Application Control (deny-script-file-program policy)** enforced. Practical implications for any future Claude Code session:
+The Windows 11 laptop has **Application Control (deny-script-file-program policy)** enforced. Practical implications:
 
 - Some installers must be staged into `C:\elevate\` before they will run.
-- PowerShell is restricted in some contexts; **PowerShell inside VS Code's integrated terminal works**, which is where development happens.
-- Confirmed-working tools (no admin needed): `git`, `gh`, `ssh`, `claude`, `npm`, `python`, `node`, `winget` (for installs from official sources).
-- Confirmed-blocked: enabling/starting Windows services that are administratively disabled (e.g., `ssh-agent`) — needs admin elevation, which we do not have routinely.
-- **Future sessions must not propose fixes that require local admin elevation.** If a step truly needs admin, flag it and find an admin-free alternative (e.g., `IdentitiesOnly yes` in `~/.ssh/config` instead of running `ssh-agent`, as in Session 1).
+- PowerShell is restricted in some contexts; PowerShell inside VS Code's integrated terminal works.
+- Confirmed-working tools (no admin needed): `git`, `gh`, `ssh`, `claude`, `npm`, `python`, `node`, `winget`.
+- Confirmed-blocked: enabling Windows services that are administratively disabled (e.g., `ssh-agent`).
+- **Future sessions must not propose fixes that require local admin elevation.**
 
 ## GitHub & web presence
 
-- **Repository**: https://github.com/My-projects-portfolio/mtad-platform (public — flipped from private to enable Pages on the free tier)
-- **Visibility implication**: the repo is public. Treat `CLAUDE.md` and `NOTES.md` as essentially **public documents** from this point on. Do **not** commit unpublished novel-method details — proposed-method ideas, ablation results, draft figures — until ready to publish. Drafts live outside the repo (or in a private branch we explicitly mark as such, with a future submodule rework if needed). If we later move to a paid plan, we can flip back to private; until then, every push is world-readable.
-- **Pages site**: https://my-projects-portfolio.github.io/mtad-platform/ — built from `docs/` via `.github/workflows/pages.yml` (Jekyll on GitHub Actions, theme `jekyll-theme-cayman`). Workflow re-runs on push to `main` when `docs/**` changes.
-- **Branch strategy**: only `main` for now. Introduce feature branches + PR-based workflow when collaborators or CI gates appear.
-- **SSH access**: project-specific key at `~/.ssh/id_ed25519_github`, routed in `~/.ssh/config` for `github.com` with `IdentitiesOnly yes`. No `ssh-agent` — key is read directly from disk on each git operation (the Windows `ssh-agent` service is disabled on this laptop and enabling it requires admin).
-- **Commit identity**: `Nafiseh Imanian <57588284+My-projects-portfolio@users.noreply.github.com>` (GitHub no-reply form, set globally).
-- **`gh` CLI**: installed via `winget install --id GitHub.cli`, authenticated to `github.com` as `My-projects-portfolio` with scopes `repo, read:org, gist`.
+- **Repository**: https://github.com/My-projects-portfolio/mtad-platform (public)
+- **Visibility implication**: the repo is public. Treat `CLAUDE.md` and `NOTES.md` as essentially **public documents**. Do **not** commit unpublished novel-method details — UserMethod implementation, ablation results, draft figures — until ready to publish.
+- **Pages site**: https://my-projects-portfolio.github.io/mtad-platform/ — built from `docs/` via `.github/workflows/pages.yml`. Currently a Jekyll placeholder; Session 7+ work will start populating it from the JSON sidecars + summary CSVs.
+- **Branch strategy**: only `main` for now.
+- **SSH access**: project-specific key at `~/.ssh/id_ed25519_github`, routed in `~/.ssh/config` with `IdentitiesOnly yes`.
+- **Commit identity**: `Nafiseh Imanian <57588284+My-projects-portfolio@users.noreply.github.com>`.
+- **`gh` CLI**: authenticated to `github.com` as `My-projects-portfolio` with scopes `repo, read:org, gist`.
 
 ## Public website plan
 
-**Long-term goal**: an auto-generated learning portal at the GitHub Pages URL — classifying every model on the platform by method category, with paper links, BibTeX, complexity analysis, strengths/weaknesses, and a live leaderboard regenerated from `results/runs/`.
+**Long-term goal**: an auto-generated learning portal at the GitHub Pages URL — classifying every model on the platform by method category, with paper links, BibTeX, complexity, strengths/weaknesses, and a live leaderboard regenerated from `results/runs/`.
 
-**Current state**: Jekyll placeholder using `jekyll-theme-cayman`, deployed by `.github/workflows/pages.yml`. One static `docs/index.md`. Just enough to prove the deploy pipeline works.
+**Current state**: Jekyll placeholder. Once analysis utilities land, the leaderboard becomes the first dynamic page driven by `results/runs/<Model>_summary.csv` files.
 
-**Future migration**: once we have content (≥3 model pages, leaderboard, comparison plots), migrate from Jekyll to **Quarto** or **MkDocs Material**. Decision deferred until we know what we want from the site (academic-paper-style vs. doc-site-style). The metadata YAMLs will drive the site so the migration is mostly a renderer swap, not a content rewrite.
+**Mandatory metadata YAML**: every model in `extensions/models/<Name>.py` MUST have a sibling `extensions/models/<Name>.meta.yaml`. Required fields: `paper_title`, `authors`, `year`, `venue`, `paper_pdf_url`, `official_repo`, `bibtex`, `category`, `subcategory`, `key_idea`, `complexity`, `strengths`, `weaknesses`, `best_for`, `not_recommended_for`. Without the meta YAML the model isn't "added" per the vertical-slicing rule.
 
-**Mandatory metadata YAML**: every model in `extensions/models/<Name>.py` MUST have a sibling `extensions/models/<Name>.meta.yaml`. Required fields:
+## Two-week supervisor demo
 
-- `paper_title`, `authors`, `year`, `venue`
-- `paper_pdf_url`, `official_repo`
-- `bibtex` (full entry, multi-line)
-- `category` (e.g. `reconstruction`, `forecasting`, `density`, `graph`, `transformer`, `foundation`)
-- `subcategory` (free-form refinement)
-- `key_idea` (one paragraph)
-- `complexity` (training and inference, big-O in n, d)
-- `strengths` (list)
-- `weaknesses` (list)
-- `best_for` (list of dataset/scenario types)
-- `not_recommended_for` (list)
+**Date**: around 2026-05-20.
 
-**Same metadata-YAML pattern applies to `extensions/datasets/` and `extensions/metrics/`.** Without the meta YAML the website page cannot be generated, which means the model is not "added" by the vertical-slicing rule.
-
-## Two-week supervisor demo target
-
-**Date**: around 2026-05-20 (~11 days from session 1).
-
-**Deliverables**:
-
-- Working benchmark engine (config-driven runs end-to-end, results persisted per the caching invariant)
-- Public GitHub repo (live)
-- Website skeleton with at least the model index and leaderboard scaffolding
-- 3–4 models compared on 2–3 datasets — actual numbers, not placeholders
-- Auto-generated LaTeX comparison table (operational + oracle metrics, dual-reported per the metric philosophy)
-- Pareto plot — accuracy vs. computation (FLOPs or inference time)
+**Deliverable status:**
+- ✅ Working benchmark engine (multi-seed runner with cost instrumentation)
+- ✅ Public GitHub repo
+- ⚠️ Website skeleton — placeholder only, leaderboard not yet auto-generated
+- ✅ Three baselines compared on 10 datasets (IForest, AutoEncoder, LSTMAD) — actual numbers
+- ⚠️ Auto-generated LaTeX comparison table — analysis utilities pending (Session 7)
+- ⚠️ Pareto plot — analysis utilities pending (Session 7)
+- ✅ Demo deck (8-slide pptx) — explains datasets, metrics, baselines, paper outputs, roadmap
 
 **Demo flow**:
-
-1. Open the live Pages site → leaderboard
-2. Click into one model page (paper, BibTeX, complexity, strengths/weaknesses)
-3. Show the repo layout — `extensions/`, configs, results
-4. Run the LaTeX-table generator on stage → paste-ready table
-5. Walk through the roadmap (next 4–6 weeks)
+1. Show the deck — 5-minute overview
+2. Open the live Pages site (placeholder) + GitHub repo
+3. Walk through the runner schema, show a sample JSON sidecar
+4. Show IForest vs AE vs LSTMAD on three contrasting datasets (where each wins)
+5. Walk through the roadmap (Session 7+)
 6. Ask: scope cuts, paper venue, supervisor's preferred angle
-
-## Session 3 (completed) — EC2 wiring
-
-**Goal**: get the EC2 instance into a usable state for Phase 1 development. **All items closed.**
-
-- ✅ SSH alias `mtad-ec2`; raw SSH and VS Code Remote-SSH both verified
-- ✅ Instance identified (`i-0a259946708f10614`, g5.xlarge), pre-installed tooling inventoried
-- ✅ IAM permission check completed — surfaced the gap above; storage strategy revised to Phase 1 (EBS-primary)
-- ✅ `node` and `claude` installed on EC2
-- ✅ Repo cloned to `~/mtad-platform/` on EBS
-- ✅ EBS layout created: `~/mtad-platform/{data,results/runs,results/scores,results/checkpoints}/`
-- ✅ Smoke test (no-op write under `results/`)
-- ✅ Instance stopped at end of session
-
-**Deferred to Phase 2 (S3 activation), not a Session 3 problem:**
-
-- Email RMIT IT to provision `mtad-ec2-s3-role` and attach to the instance
-- `scripts/sync_from_s3.sh` / `sync_to_s3.sh` plumbing
-- Round-trip artifact test laptop ↔ S3 ↔ EC2
-
-## Session 4 (completed) — TSB-AD venv + first end-to-end run
-
-**Goal**: prove the benchmark engine works end-to-end on EC2 and that small results flow via git.
-
-- ✅ Python 3.11 venv at `~/mtad-platform/.venv/`
-- ✅ Installed TSB-AD's full `requirements.txt` (16 direct, ~80 transitive, ~5.5 GB venv)
-- ✅ `pip install -e ./TSB-AD` — TSB-AD importable as editable package
-- ✅ All five core models import cleanly: IForest, USAD, TranAD, AnomalyTransformer, OmniAnomaly
-- ✅ PyTorch 2.11 + CUDA 13.0 confirmed; NVIDIA A10G detected
-- ✅ Smoke test: IForest end-to-end via `TSB-AD/benchmark_exp/Run_Detector_M.py` on bundled SMD 057 (preserved the `--file_lsit` typo as documented). Results: AUC-PR 0.10, AUC-ROC 0.80, VUS-PR 0.10, VUS-ROC 0.81, Standard-F1 0.17, PA-F1 0.52, Affiliation-F 0.81
-- ✅ `.gitignore` updated to remove the blanket `results/` exclusion; results CSV + 190 KB score `.npy` committed
-- ✅ `gh` CLI installed on EC2, authenticated via device-code flow; commit pushed from EC2, pulled to laptop (after fixing `safe.directory` ownership)
-- ✅ Instance stopped at end of session
-
-## Next session preview
-
-**Session 5**: Automated website generation from results — leaderboard page and per-model pages, generated from `results/runs/*.csv` and (future) `extensions/models/*.meta.yaml` files. The current Pages site is a static placeholder; Session 5 turns it into something driven by committed results.
-
-**Session 6+** (order TBD per the vertical-slicing rule — one full slice per session, not bulk-import):
-
-- Add metrics extensions in `extensions/metrics/`: operational F1 (fixed-threshold complement to oracle Standard-F1), FLOPs, parameter count, training/inference timing, peak GPU memory.
-- Run additional baselines already in TSB-AD (USAD, TranAD, AnomalyTransformer) on the same SMD 057 starting point to populate the leaderboard.
-- Convert `TSB-AD/` from gitignored vendor copy to a proper git submodule.
-- Scaffold the `extensions/` directory skeleton.
-- `pyproject.toml` and `pip install -e .` for the platform itself (separate from TSB-AD's editable install).
-- First model adapter under `extensions/models/`: MTAD-GAT (the only baseline from the original list not already shipped in TSB-AD).
 
 ---
 
-## Quick orientation pointers (kept minimal — see NOTES.md for detail)
+## Session 6 — what landed
 
+**Built `extensions/runners/run_baseline.py`** with the full schema described in "Runner schema" above. Includes: sklearn 1.6+ shim, defensive HP-dict filtering, `param_count` via nn.Module init hook, fit/score time split via class-method wrapping (broadened to all model classes with fit + decision_function, not just BaseDetector subclasses, after LSTMAD revealed it doesn't inherit from BaseDetector), `infer_per_window_ms` derivation for semisupervised models, `peak_gpu_memory_bytes`, full reproducibility metadata.
+
+**Pinned the 10-dataset dev subset** at `extensions/configs/dev_subset.csv`. Decision criteria: one file per source family, balance canonical comparison anchors (SMD/MSL/SMAP/SWaT/PSM — the datasets every recent SOTA paper reports) with diversity additions (MITDB/GECCO/CATSv2/OPPORTUNITY/Exathlon — different domains, channel counts from 2 to 248, training-set sizes from 500 to 50K).
+
+**Pinned the 10-baseline canonical list** spanning classical, reconstruction, forecasting, transformer, and recent SOTA paradigms.
+
+**Pinned multi-seed protocol**: 5 seeds `[13, 17, 42, 1337, 2024]` for stochastic models; 1 seed for deterministic classical models (TSB-AD's wrappers for IForest/LOF/OCSVM don't forward `random_state`).
+
+**Ran three baselines**:
+- **IForest**: 10 cells × 1 seed. Deterministic, single seed sufficient. Used to validate the runner end-to-end.
+- **AutoEncoder**: 10 cells × 5 seeds = 50 cells. First deep model. Validated nn.Module hook for param_count (~17K–81K params, scales with input dim) and GPU memory tracking (~19 MB per cell).
+- **LSTMAD**: 8 cells × 1 seed (MSL and SMD failed — see "Known limitations"). First non-BaseDetector model; revealed the need to broaden instrumentation from `BaseDetector.__subclasses__()` to all model classes with `fit + decision_function` methods.
+
+**Methodological observations the data already surfaces:**
+- AE doesn't dominate IForest — they trade wins across 10 datasets. Real instance of the "Elephant in the Room" pattern under reliable measures.
+- PA-F1 inflation is reproducible: AE hits PA-F1=1.0 on MSL/SMAP/Exathlon across all 5 seeds, despite AUC-PR in the 0.28–0.99 range. Validates the dual-reporting argument empirically.
+- LSTMAD wins big on three datasets where neither baseline could: SMAP (0.83 vs 0.46 / 0.61), GECCO (0.50 vs 0.05 / 0.19), OPPORTUNITY (0.25 vs 0.18 / 0.06) — but loses on SWaT (0.25 vs AE's 0.54). No single approach wins everywhere.
+- Cost picture is non-monotone in dataset size: AE is 7× faster than IForest on small datasets but slower on small-channel-count high-volume ones (MITDB).
+
+**Decisions explicitly made and documented**:
+- Skip FLOPs instrumentation. Re-run if a future paper specifically requires it.
+- Accept the deep-model-on-small-train-data gap as a documented limitation rather than working around it with per-model HP overrides.
+
+**Demo deck built** at `/home/claude/build_deck.js` (pptxgenjs) → `mtad-platform.pptx`. 8 slides: title, overview, datasets, metrics, baselines, experimental rigor, paper outputs, roadmap.
+
+---
+
+## Next session preview (Session 7)
+
+**Priority order:**
+
+1. **Finish LSTMAD's 5-seed sweep** (~40 min compute) — the four new seeds. The MSL/SMD error sidecars will repopulate but won't enter the summary CSV.
+2. **Smoke-test the remaining deep models** in order: USAD → OmniAnomaly → TranAD → AnomalyTransformer → TimesNet. One seed × 10 datasets each, verify sidecars populate cleanly, then run the 5-seed sweep. USAD is the multi-network test case for `param_count` (sum across G + D networks).
+3. **Build `extensions/analysis/`** — the "commit 2" work, all operating on existing data (no re-runs):
+   - `aggregate.py`: mean ± std per `(model, dataset)`, paired Wilcoxon across cells
+   - `plots.py`: per-dataset bar charts with seed error bars, Standard-F1 vs PA-F1 scatter (F1-inflation visualization), Pareto plot (accuracy × cost), critical-difference diagram via `autorank`
+   - `tables.py`: LaTeX-ready comparison table generator
+4. **Operational F1 backfill** — recompute from saved score arrays, add to summary CSVs. ~30 min of code.
+5. **Auto-generate the leaderboard page** on the Pages site from `results/runs/<Model>_summary.csv` files.
+6. **UserMethod scaffold** — `extensions/models/UserMethod.py` + ablation harness. OFF the public repo until publish.
+7. **Convert `TSB-AD/` to a git submodule** — deferred from Session 6 since the work was moving fast on the runner. Low-risk one-session task.
+
+---
+
+## Quick orientation pointers
+
+- Multi-seed runner: `extensions/runners/run_baseline.py`
+- Dev subset: `extensions/configs/dev_subset.csv`
 - TSB-AD base class: `TSB-AD/TSB_AD/models/base.py:21` — `BaseDetector`
-- Multivariate runner: `TSB-AD/benchmark_exp/Run_Detector_M.py`
-- HP dicts: `TSB-AD/TSB_AD/HP_list.py`
+- TSB-AD multivariate runner (upstream, unused now): `TSB-AD/benchmark_exp/Run_Detector_M.py`
+- HP dicts: `TSB-AD/TSB_AD/HP_list.py` — `Optimal_Multi_algo_HP_dict`
 - Metrics entry point: `TSB-AD/TSB_AD/evaluation/metrics.py:3` — `get_metrics(score, labels, slidingWindow=...)`
-- Argparse flag is `--file_lsit` (typo'd in the source) — preserve when calling, don't "fix" upstream
+- TSB-AD's argparse flag is `--file_lsit` (typo'd in upstream) — preserve when calling upstream; our runner uses `--file_list` (corrected)
 
 See `NOTES.md` for the full investigation report.
