@@ -1,0 +1,40 @@
+{
+  "model": "IForest",
+  "file": "115_PSM_id_1_Facility_tr_50000_1st_129872.csv",
+  "seed": 42,
+  "timestamp_utc": "2026-05-18T02:02:30+00:00",
+  "git_sha": "2fe16c5167851ba28a0113fbbcb1fff055e30990",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "n_estimators": 25,
+    "max_features": 0.8
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 217624,
+  "n_features": 25,
+  "sliding_window": 125,
+  "train_index": 50000,
+  "wall_time_seconds": 191.26403188705444,
+  "peak_gpu_memory_bytes": 0,
+  "score_path": "scores/IForest/115_PSM_id_1_Facility_tr_50000_1st_129872__seed42.npy",
+  "metrics": {
+    "AUC-PR": 0.18557374487538333,
+    "AUC-ROC": 0.6191286519325118,
+    "VUS-PR": 0.17268504456145367,
+    "VUS-ROC": 0.5719583128031387,
+    "Standard-F1": 0.26239473898355814,
+    "PA-F1": 0.8314431138989208,
+    "Event-based-F1": 0.2746814922939962,
+    "R-based-F1": 0.1717694685495443,
+    "Affiliation-F": 0.7234749037904286
+  }
+}

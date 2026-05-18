@@ -1,0 +1,40 @@
+{
+  "model": "IForest",
+  "file": "027_MITDB_id_9_Medical_tr_25000_1st_52255.csv",
+  "seed": 42,
+  "timestamp_utc": "2026-05-18T02:08:25+00:00",
+  "git_sha": "2fe16c5167851ba28a0113fbbcb1fff055e30990",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "n_estimators": 25,
+    "max_features": 0.8
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 100000,
+  "n_features": 2,
+  "sliding_window": 119,
+  "train_index": 25000,
+  "wall_time_seconds": 6.51729941368103,
+  "peak_gpu_memory_bytes": 0,
+  "score_path": "scores/IForest/027_MITDB_id_9_Medical_tr_25000_1st_52255__seed42.npy",
+  "metrics": {
+    "AUC-PR": 0.011090572502320175,
+    "AUC-ROC": 0.736382346182527,
+    "VUS-PR": 0.012105832516468932,
+    "VUS-ROC": 0.7614640007010252,
+    "Standard-F1": 0.03828572662538629,
+    "PA-F1": 0.9106203995793901,
+    "Event-based-F1": 0.06691449814126386,
+    "R-based-F1": 0.06920848665153057,
+    "Affiliation-F": 0.7628449999672274
+  }
+}
