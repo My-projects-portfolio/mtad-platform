@@ -223,6 +223,16 @@ _eagerly_import_tsb_models()
 _instrument_model_class_timing()
 _hook_nn_module_init()
 
+# Register mtad-platform extensions (MTGFLOW; future detectors land here too)
+# into TSB-AD's dispatch pool. Runs after the instrumentation passes so the
+# TSB-AD-core module walk finishes cleanly first. Note: MTGFLOW_AD lives in
+# extensions.models.mtgflow, not TSB_AD.models.*, so its fit/decision_function
+# are NOT caught by _instrument_model_class_timing(); MTGFLOW JSON sidecars
+# will carry wall_time_seconds but fit_time_seconds and score_time_seconds
+# remain 0. Widen instrumentation in a follow-up if a paper needs the split.
+from extensions.registry import register_all
+register_all()
+
 
 # ---- Standard helpers --------------------------------------------------------
 
