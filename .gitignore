@@ -59,4 +59,10 @@ wandb/
 *.ckpt
 
 # --- TSB-AD vendored upstream (will become a git submodule in a later session) ---
-TSB-AD/
+
+# TSB-AD: vendor the source, but never track datasets or large artifacts
+TSB-AD/Datasets/
+TSB-AD/**/*.zip
+TSB-AD/**/*.npy
+TSB-AD/**/__pycache__/
+TSB-AD/**/*.egg-info/
