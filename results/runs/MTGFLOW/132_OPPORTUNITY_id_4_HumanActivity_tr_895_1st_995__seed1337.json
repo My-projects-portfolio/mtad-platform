@@ -1,0 +1,35 @@
+{
+  "model": "MTGFLOW",
+  "file": "132_OPPORTUNITY_id_4_HumanActivity_tr_895_1st_995.csv",
+  "seed": 1337,
+  "timestamp_utc": "2026-05-19T06:11:14+00:00",
+  "git_sha": "b46becd20149af13b5bf83ea6c757d59486a8da2",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "n_blocks": 1,
+    "input_size": 1,
+    "hidden_size": 32,
+    "n_hidden": 1,
+    "window_size": 60,
+    "stride_size": 10,
+    "batch_size": 512,
+    "epochs": 40,
+    "lr": 0.002,
+    "weight_decay": 0.0005,
+    "dropout": 0.0,
+    "batch_norm": false,
+    "grad_clip_norm": 1.0,
+    "score_aggregation": "mean"
+  },
+  "hp_dropped_keys": [],
+  "status": "error",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/ec2-user/mtad-platform/extensions/runners/run_baseline.py\", line 367, in run_one\n    raise RuntimeError(f\"Model returned non-array: {output!r}\")\nRuntimeError: Model returned non-array: \"An error occurred while running the model 'run_MTGFLOW': CUDA out of memory. Tried to allocate 19.23 GiB. GPU 0 has a total capacity of 22.06 GiB of which 18.17 GiB is free. Including non-PyTorch memory, this process has 3.88 GiB memory in use. Of the allocated memory 1.19 GiB is allocated by PyTorch, and 2.39 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)\"\n"
+}

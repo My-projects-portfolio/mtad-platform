@@ -1,0 +1,44 @@
+{
+  "model": "OmniAnomaly",
+  "file": "027_MITDB_id_9_Medical_tr_25000_1st_52255.csv",
+  "seed": 42,
+  "timestamp_utc": "2026-05-19T01:12:39+00:00",
+  "git_sha": "18879c9a76a37867c97263bfe5fe222733755a16",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "win_size": 100,
+    "lr": 0.002
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 100000,
+  "n_features": 2,
+  "sliding_window": 119,
+  "train_index": 25000,
+  "wall_time_seconds": 226.84370923042297,
+  "fit_time_seconds": 220.49876737594604,
+  "score_time_seconds": 6.3170857429504395,
+  "infer_per_window_ms": 0.08422780990600585,
+  "peak_gpu_memory_bytes": 131938816,
+  "param_count": 24265,
+  "score_path": "scores/OmniAnomaly/027_MITDB_id_9_Medical_tr_25000_1st_52255__seed42.npy",
+  "metrics": {
+    "AUC-PR": 0.0071852342174091935,
+    "AUC-ROC": 0.6089472264791072,
+    "VUS-PR": 0.009539711606965784,
+    "VUS-ROC": 0.6638247136018104,
+    "Standard-F1": 0.026047922141655973,
+    "PA-F1": 0.4117926771279125,
+    "Event-based-F1": 0.02652893532104704,
+    "R-based-F1": 0.016752855261562668,
+    "Affiliation-F": 0.7958361611421944
+  }
+}

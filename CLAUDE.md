@@ -36,6 +36,7 @@ Build a **long-term personal multivariate time-series anomaly detection (MTAD) r
 ### Known followups
 
 - **MTGFLOW upstream issue**: file an issue at `github.com/zqhang/MTGFLOW` flagging the two dead imports at the top of `models/MTGFLOW.py` — `from cgitb import reset` (shadowed by a local on line 21) and `from turtle import forward, shape` (`forward` is shadowed by method definitions, `shape` is only used as `.shape` attribute access). The `turtle` import blocks module load on Python builds without `tkinter` (e.g. our Amazon Linux 2023 venv). We strip it during vendoring; upstream should clean it up. Non-blocking — file when convenient.
+- **Sidecar metadata schema**: when a runner crashes inside the model call, `n_samples` and `n_features` fields end up `None` in the error sidecar. These could be populated from the input array shape before the model call so error sidecars carry the dataset's basic dimensions even when the model didn't run. Non-blocking cleanup.
 
 ## Key design principle: do NOT modify TSB-AD core in place
 
@@ -171,6 +172,10 @@ LSTMAD fails on `002_MSL` and `078_SMD` (both with `train_index=500`) with `Runt
 **Expected to affect other windowed deep models**: USAD, OmniAnomaly, TranAD, AnomalyTransformer, TimesNet probably hit the same wall on the same two datasets. Verify on each model's smoke test.
 
 **Behaviour by design**: error sidecars are still written (with traceback); `<Model>_summary.csv` excludes error cells naturally. For paper tables, per-dataset bar charts handle the gap cleanly (no bar for affected `(model, dataset)` cells). Document the exclusion in the methodology section if a reviewer asks.
+
+### MTGFLOW on high-channel data
+
+MTGFLOW with default HPs (batch_size=512, window_size=60) OOMs on datasets with channel count ≳ 100 due to the O(K²) graph attention block. Concrete instance: all 5 seeds OOMed on `132_OPPORTUNITY_id_4_HumanActivity` (248 channels) on the A10G's 22 GiB GPU — 19.23 GiB allocation request exceeded available memory. Error sidecars are preserved in `results/runs/MTGFLOW/`. This is an architectural property of MTGFLOW, not a platform bug: the original AAAI paper evaluated on datasets up to ~123 channels (WADI). Following the Session 6 precedent (LSTMAD-on-small-train), we accept this as a documented limitation rather than introducing per-model HP overrides that would break the "same default HPs everywhere" invariant.
 
 ---
 

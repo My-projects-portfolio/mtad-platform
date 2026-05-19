@@ -1,0 +1,44 @@
+{
+  "model": "OmniAnomaly",
+  "file": "173_GECCO_id_1_Sensor_tr_16165_1st_16265.csv",
+  "seed": 2024,
+  "timestamp_utc": "2026-05-19T02:43:34+00:00",
+  "git_sha": "18879c9a76a37867c97263bfe5fe222733755a16",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "win_size": 100,
+    "lr": 0.002
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 138521,
+  "n_features": 9,
+  "sliding_window": 57,
+  "train_index": 16165,
+  "wall_time_seconds": 151.08183550834656,
+  "fit_time_seconds": 141.57980680465698,
+  "score_time_seconds": 9.474510192871094,
+  "infer_per_window_ms": 0.07743396476569268,
+  "peak_gpu_memory_bytes": 132667392,
+  "param_count": 25168,
+  "score_path": "scores/OmniAnomaly/173_GECCO_id_1_Sensor_tr_16165_1st_16265__seed2024.npy",
+  "metrics": {
+    "AUC-PR": 0.08627307089813704,
+    "AUC-ROC": 0.6073199817693729,
+    "VUS-PR": 0.042441882104870605,
+    "VUS-ROC": 0.5845919756095823,
+    "Standard-F1": 0.22090666056210984,
+    "PA-F1": 0.5049833887043189,
+    "Event-based-F1": 0.15359926639156316,
+    "R-based-F1": 0.04824148131974771,
+    "Affiliation-F": 0.6687027946514893
+  }
+}
