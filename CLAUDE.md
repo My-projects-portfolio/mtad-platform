@@ -22,6 +22,7 @@ Build a **long-term personal multivariate time-series anomaly detection (MTAD) r
 - **Session 4 (2026-05-11)**: Full TSB-AD venv on EC2 (Python 3.11, PyTorch 2.11 + CUDA 13.0; A10G detected). TSB-AD installed editable; all five core models import cleanly. First end-to-end smoke test: IForest on the bundled SMD 057 dataset. Results CSV + scores `.npy` committed to git; `.gitignore` updated to remove the blanket `results/` exclusion. `gh` CLI installed on EC2 and authenticated; commit pushed from EC2, pulled to laptop.
 - **Session 5 (2026-05-11)**: Full TSB-AD-M multivariate dataset downloaded to EC2 EBS — 200 CSVs / 2.5 GB at `~/mtad-platform/TSB-AD/Datasets/TSB-AD-M/`. All 180 files referenced by `TSB-AD-M-Eva.csv` present. Data not committed (gitignored). Platform ready to run any TSB-AD model against the full benchmark.
 - **Session 6 (2026-05-18)**: **Multi-seed runner with cost instrumentation; first three baseline models exercised.** See "Experimental setup" and "Session 6 — what landed" below for detail.
+- **Session 7 (2026-05-19)**: **First detector integrated via the `extensions/` wrapper pattern — MTGFLOW (Zhou et al., AAAI 2023).** Wrapper at `extensions/models/mtgflow/` translates TSB-AD's `(n_samples, n_features)` contract to MTGFLOW's `(B, K, L, D)` windowed-tensor contract; registry hook attaches it to TSB-AD's `Semisupervise_AD_Pool` and `model_wrapper.run_MTGFLOW` at runtime without touching TSB-AD core. Upstream model code (LSTM + Graph Attention + MAF) vendored under `_upstream/` from `github.com/zqhang/MTGFLOW` commit `b89a6ae506d9d04094c60a03e310d8bb71dd9478`, pinned so benchmark numbers stay reproducible across upstream changes. `_upstream/vendor.sh` applies exactly two mechanical patches (relative-import rewrite + a dead-`turtle` import strip for tkinter-less Python builds); full provenance and diffs in `_upstream/ATTRIBUTION.md`. Smoke test on SMD 057 (5 epochs, seed 42) passes all five correctness gates with AUC-ROC 0.9472, AUC-PR 0.4609 (vs 0.023 baseline = 20× lift), training neg-log-lik 1.957 → 1.622, 2.0s wall time on the A10G. Ready for the 10-dataset × 5-seed production sweep. **This is the template pattern for all future model adapters that aren't already in TSB-AD** — vendor upstream into `_upstream/` via a `vendor.sh` script, write a `BaseDetector` wrapper in `detector.py`, expose a `run_<Model>` in `runner.py`, register via `extensions/registry.py`. No edits to TSB-AD core.
 
 ### Known artifacts (current)
 
@@ -31,6 +32,10 @@ Build a **long-term personal multivariate time-series anomaly detection (MTAD) r
 - `results/scores/<Model>/<file_stem>__seed<N>.npy` — one anomaly-score array per cell.
 - `results/runs/<Model>_summary.csv` — flat aggregate, regenerated from successful sidecars on every runner exit.
 - Current cells on disk: IForest (10 × 1 seed), AutoEncoder (10 × 5 seeds = 50), LSTMAD (8 × 1 seed; MSL and SMD error sidecars — see "Known limitations").
+
+### Known followups
+
+- **MTGFLOW upstream issue**: file an issue at `github.com/zqhang/MTGFLOW` flagging the two dead imports at the top of `models/MTGFLOW.py` — `from cgitb import reset` (shadowed by a local on line 21) and `from turtle import forward, shape` (`forward` is shadowed by method definitions, `shape` is only used as `.shape` attribute access). The `turtle` import blocks module load on Python builds without `tkinter` (e.g. our Amazon Linux 2023 venv). We strip it during vendoring; upstream should clean it up. Non-blocking — file when convenient.
 
 ## Key design principle: do NOT modify TSB-AD core in place
 

@@ -109,7 +109,7 @@ Each is a one-column CSV with header `file_name`. Multivariate eval set is rough
 - TranAD ✅ (`TranAD.py`) — was on our "to add" list
 - OmniAnomaly ✅ (`OmniAnomaly.py`) — was on our "to add" list
 - AnomalyTransformer ✅ (`AnomalyTransformer.py`) — was on our "to add" list
-- **MTAD-GAT ❌** — only one from the user's list that is genuinely missing
+- **MTAD-GAT ❌** — only one from the user's original list that is genuinely missing from TSB-AD core (still candidate for a future `extensions/` integration following the MTGFLOW template — see `extensions/models/mtgflow/` and the Session 7 CLAUDE.md entry)
 
 ---
 
