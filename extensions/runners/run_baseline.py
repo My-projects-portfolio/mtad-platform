@@ -230,6 +230,15 @@ _hook_nn_module_init()
 # are NOT caught by _instrument_model_class_timing(); MTGFLOW JSON sidecars
 # will carry wall_time_seconds but fit_time_seconds and score_time_seconds
 # remain 0. Widen instrumentation in a follow-up if a paper needs the split.
+#
+# Make extensions.* importable when this script is invoked by path
+# (python extensions/runners/run_baseline.py ...) rather than as a module.
+# Under direct-script invocation Python sets sys.path[0] to the script's
+# directory (extensions/runners/), not the repo root, so a plain
+# `from extensions.registry import …` would raise ModuleNotFoundError.
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[2]))
 from extensions.registry import register_all
 register_all()
 
