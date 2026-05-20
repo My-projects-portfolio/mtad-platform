@@ -1,0 +1,44 @@
+{
+  "model": "TranAD",
+  "file": "078_SMD_id_22_Facility_tr_500_1st_326.csv",
+  "seed": 1337,
+  "timestamp_utc": "2026-05-19T14:02:21+00:00",
+  "git_sha": "13debe328c4a265fb1ee64c6a1394b9ccaac4be4",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "win_size": 10,
+    "lr": 0.001
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 23693,
+  "n_features": 38,
+  "sliding_window": 4,
+  "train_index": 500,
+  "wall_time_seconds": 1.706336259841919,
+  "fit_time_seconds": 0.9397139549255371,
+  "score_time_seconds": 0.7398879528045654,
+  "infer_per_window_ms": 0.031901347510221424,
+  "peak_gpu_memory_bytes": 59910656,
+  "param_count": 252150,
+  "score_path": "scores/TranAD/078_SMD_id_22_Facility_tr_500_1st_326__seed1337.npy",
+  "metrics": {
+    "AUC-PR": 0.5913507552182642,
+    "AUC-ROC": 0.8961248250870232,
+    "VUS-PR": 0.49048593887965897,
+    "VUS-ROC": 0.8360685448347756,
+    "Standard-F1": 0.7603414873360407,
+    "PA-F1": 0.9237623762376238,
+    "Event-based-F1": 0.6579399141630896,
+    "R-based-F1": 0.2238185567882988,
+    "Affiliation-F": 0.8845906778700474
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "model": "CBLOF",
+  "file": "027_MITDB_id_9_Medical_tr_25000_1st_52255.csv",
+  "seed": 17,
+  "timestamp_utc": "2026-05-19T19:57:52+00:00",
+  "git_sha": "13debe328c4a265fb1ee64c6a1394b9ccaac4be4",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "n_clusters": 4,
+    "alpha": 0.6
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 100000,
+  "n_features": 2,
+  "sliding_window": 119,
+  "train_index": 25000,
+  "wall_time_seconds": 0.12470030784606934,
+  "fit_time_seconds": 0.12467026710510254,
+  "score_time_seconds": 0.0,
+  "infer_per_window_ms": null,
+  "peak_gpu_memory_bytes": 0,
+  "param_count": 0,
+  "score_path": "scores/CBLOF/027_MITDB_id_9_Medical_tr_25000_1st_52255__seed17.npy",
+  "metrics": {
+    "AUC-PR": 0.005770519611876464,
+    "AUC-ROC": 0.5233702114915089,
+    "VUS-PR": 0.006247576116514654,
+    "VUS-ROC": 0.5491289370364552,
+    "Standard-F1": 0.025139069495460038,
+    "PA-F1": 0.24223776223776225,
+    "Event-based-F1": 0.02868411617067046,
+    "R-based-F1": 0.010597695569316262,
+    "Affiliation-F": 0.6840449884728029
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "model": "FITS",
+  "file": "173_GECCO_id_1_Sensor_tr_16165_1st_16265.csv",
+  "seed": 13,
+  "timestamp_utc": "2026-05-19T22:00:55+00:00",
+  "git_sha": "13debe328c4a265fb1ee64c6a1394b9ccaac4be4",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "win_size": 100,
+    "lr": 0.001
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 138521,
+  "n_features": 9,
+  "sliding_window": 57,
+  "train_index": 16165,
+  "wall_time_seconds": 27.826979398727417,
+  "fit_time_seconds": 24.548420906066895,
+  "score_time_seconds": 3.2560834884643555,
+  "infer_per_window_ms": 0.02661155553029157,
+  "peak_gpu_memory_bytes": 21739520,
+  "param_count": 5616,
+  "score_path": "scores/FITS/173_GECCO_id_1_Sensor_tr_16165_1st_16265__seed13.npy",
+  "metrics": {
+    "AUC-PR": 0.1150982682374345,
+    "AUC-ROC": 0.7530016263308466,
+    "VUS-PR": 0.12919360017265474,
+    "VUS-ROC": 0.8644453906802172,
+    "Standard-F1": 0.2683480512477893,
+    "PA-F1": 0.5718901453957996,
+    "Event-based-F1": 0.15984015984015953,
+    "R-based-F1": 0.04775225688294761,
+    "Affiliation-F": 0.6687026340271967
+  }
+}

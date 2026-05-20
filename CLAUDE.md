@@ -37,6 +37,7 @@ Build a **long-term personal multivariate time-series anomaly detection (MTAD) r
 
 - **MTGFLOW upstream issue**: file an issue at `github.com/zqhang/MTGFLOW` flagging the two dead imports at the top of `models/MTGFLOW.py` — `from cgitb import reset` (shadowed by a local on line 21) and `from turtle import forward, shape` (`forward` is shadowed by method definitions, `shape` is only used as `.shape` attribute access). The `turtle` import blocks module load on Python builds without `tkinter` (e.g. our Amazon Linux 2023 venv). We strip it during vendoring; upstream should clean it up. Non-blocking — file when convenient.
 - **Sidecar metadata schema**: when a runner crashes inside the model call, `n_samples` and `n_features` fields end up `None` in the error sidecar. These could be populated from the input array shape before the model call so error sidecars carry the dataset's basic dimensions even when the model didn't run. Non-blocking cleanup.
+- **Trim deterministic-method sweeps to 1 seed**: future sweeps should run only 1 seed for deterministic detectors (PCA, KNN, HBOS, COPOD, LOF, and any classical model whose TSB-AD wrapper doesn't forward `random_state`) — the extra 4 seeds produce identical sidecars and waste compute. The 2026-05-19 15-model sweep ran 5 seeds for all 15 (confirmed seed-invariant for several, e.g. TranAD on SMAP); analysis dedupes via `drop_duplicates` on the deterministic methods. Per the multi-seed protocol, deterministic = 1 seed going forward.
 
 ## Key design principle: do NOT modify TSB-AD core in place
 

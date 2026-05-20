@@ -1,0 +1,44 @@
+{
+  "model": "TimesNet",
+  "file": "115_PSM_id_1_Facility_tr_50000_1st_129872.csv",
+  "seed": 13,
+  "timestamp_utc": "2026-05-19T20:41:17+00:00",
+  "git_sha": "13debe328c4a265fb1ee64c6a1394b9ccaac4be4",
+  "env": {
+    "python": "3.11.14",
+    "platform": "Linux-6.1.161-183.298.amzn2023.x86_64-x86_64-with-glibc2.34",
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "gpu_name": "NVIDIA A10G"
+  },
+  "hp": {
+    "win_size": 96,
+    "lr": 0.0001
+  },
+  "hp_dropped_keys": [],
+  "status": "success",
+  "n_samples": 217624,
+  "n_features": 25,
+  "sliding_window": 125,
+  "train_index": 50000,
+  "wall_time_seconds": 91.7555718421936,
+  "fit_time_seconds": 78.85562515258789,
+  "score_time_seconds": 12.874654531478882,
+  "infer_per_window_ms": 0.07680674922134588,
+  "peak_gpu_memory_bytes": 587983360,
+  "param_count": 74241,
+  "score_path": "scores/TimesNet/115_PSM_id_1_Facility_tr_50000_1st_129872__seed13.npy",
+  "metrics": {
+    "AUC-PR": 0.1283372156633614,
+    "AUC-ROC": 0.5154254299693225,
+    "VUS-PR": 0.15486017355638576,
+    "VUS-ROC": 0.5644473226048414,
+    "Standard-F1": 0.20160537711374793,
+    "PA-F1": 0.8745943969654038,
+    "Event-based-F1": 0.20149253731343264,
+    "R-based-F1": 0.04117553599091893,
+    "Affiliation-F": 0.6942863541924214
+  }
+}
