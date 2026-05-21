@@ -1,0 +1,44 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Main results: per-model mean $\pm$ std of AUC-PR and AUC-ROC across all (dataset, seed) cells. Best in \textbf{bold}, second-best \underline{underlined}. MTGFLOW (in \textit{italics}) is the method introduced in this work.}
+\label{tab:main-results}
+\begin{tabular}{lcc}
+\toprule
+Method & AUC-PR & AUC-ROC \\
+\midrule
+\multicolumn{3}{l}{\textit{Classical}} \\
+CBLOF & 0.306$\pm$0.311 & 0.716$\pm$0.147 \\
+COPOD & 0.252$\pm$0.294 & 0.678$\pm$0.134 \\
+EIF & 0.295$\pm$0.283 & 0.690$\pm$0.153 \\
+HBOS & 0.222$\pm$0.206 & 0.703$\pm$0.104 \\
+IForest & 0.290$\pm$0.288 & 0.806$\pm$0.155 \\
+KMeansAD & 0.381$\pm$0.409 & 0.755$\pm$0.200 \\
+KNN & 0.216$\pm$0.223 & 0.612$\pm$0.168 \\
+LOF & 0.186$\pm$0.169 & 0.601$\pm$0.109 \\
+PCA & 0.321$\pm$0.285 & 0.794$\pm$0.150 \\
+\midrule
+\multicolumn{3}{l}{\textit{Reconstruction}} \\
+AutoEncoder & 0.307$\pm$0.306 & 0.706$\pm$0.149 \\
+OmniAnomaly & 0.210$\pm$0.260 & 0.685$\pm$0.163 \\
+USAD & 0.330$\pm$0.280 & \underline{0.834$\pm$0.144} \\
+\midrule
+\multicolumn{3}{l}{\textit{Forecasting}} \\
+CNN & \underline{0.409$\pm$0.292} & 0.831$\pm$0.121 \\
+FITS & 0.197$\pm$0.235 & 0.682$\pm$0.231 \\
+LSTMAD & \textbf{0.415$\pm$0.316} & \textbf{0.839$\pm$0.119} \\
+\midrule
+\multicolumn{3}{l}{\textit{Transformer}} \\
+AnomalyTransformer & 0.079$\pm$0.064 & 0.480$\pm$0.107 \\
+PatchTST & 0.173$\pm$0.174 & 0.691$\pm$0.227 \\
+TimesNet & 0.199$\pm$0.204 & 0.701$\pm$0.232 \\
+TranAD & 0.361$\pm$0.305 & 0.803$\pm$0.141 \\
+\midrule
+\multicolumn{3}{l}{\textit{Density}} \\
+\textit{MTGFLOW} & 0.327$\pm$0.357 & 0.749$\pm$0.178 \\
+\midrule
+\multicolumn{3}{l}{\textit{Foundation}} \\
+OFA & 0.299$\pm$0.279 & 0.750$\pm$0.263 \\
+\bottomrule
+\end{tabular}
+\end{table}

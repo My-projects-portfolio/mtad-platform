@@ -1,0 +1,44 @@
+\begin{table}[t]
+\centering
+\small
+\caption{$F^{\text{aff}}$ per (model, dataset), mean across 5 seeds. Best per column in \textbf{bold}, second-best \underline{underlined}, missing cells (---) indicate failed cells (e.g. OOM on high-dimensional inputs).}
+\label{tab:by-dataset-affiliation-f}
+\begin{tabular}{lcccccccccc}
+\toprule
+Method & CATSv2 & Exathlon & GECCO & MITDB & MSL & OPPORTUNITY & PSM & SMAP & SMD & SWaT \\
+\midrule
+\multicolumn{11}{l}{\textit{Classical}} \\
+CBLOF & 0.668 & 0.999 & 0.669 & 0.684 & \underline{0.999} & \underline{0.846} & 0.811 & 1.000 & 0.878 & 0.716 \\
+COPOD & 0.668 & 0.993 & 0.676 & 0.748 & 0.999 & 0.771 & 0.733 & 1.000 & 0.675 & \textbf{0.864} \\
+EIF & 0.668 & 0.997 & 0.672 & 0.742 & 0.999 & 0.789 & 0.776 & 1.000 & 0.903 & 0.716 \\
+HBOS & 0.668 & 0.998 & \underline{0.690} & 0.683 & 0.999 & 0.687 & 0.723 & 1.000 & 0.695 & 0.806 \\
+IForest & 0.668 & 0.999 & 0.672 & 0.763 & 0.997 & 0.751 & 0.723 & 0.997 & 0.679 & 0.796 \\
+KMeansAD & 0.671 & 0.996 & 0.670 & 0.702 & \textbf{1.000} & 0.670 & 0.726 & 1.000 & 0.846 & 0.727 \\
+KNN & 0.673 & 0.740 & 0.669 & 0.749 & 0.999 & 0.815 & \underline{0.817} & 1.000 & \textbf{0.912} & 0.716 \\
+LOF & 0.709 & 0.674 & \textbf{0.747} & 0.749 & 0.999 & \textbf{0.910} & 0.807 & 1.000 & 0.889 & 0.716 \\
+PCA & 0.670 & \underline{0.999} & 0.670 & 0.999 & 0.996 & 0.674 & 0.708 & 0.997 & 0.671 & \underline{0.827} \\
+\midrule
+\multicolumn{11}{l}{\textit{Reconstruction}} \\
+AutoEncoder & 0.668 & 0.999 & 0.669 & 0.685 & 0.999 & 0.697 & 0.765 & 1.000 & 0.673 & 0.774 \\
+OmniAnomaly & \underline{0.741} & 0.990 & 0.669 & 0.799 & 0.884 & 0.720 & 0.694 & 0.983 & 0.881 & 0.716 \\
+USAD & \textbf{0.755} & 0.990 & 0.669 & 0.863 & 0.986 & 0.711 & 0.714 & 0.998 & 0.784 & 0.749 \\
+\midrule
+\multicolumn{11}{l}{\textit{Forecasting}} \\
+CNN & 0.722 & \textbf{0.999} & 0.669 & \textbf{0.999} & 0.899 & 0.714 & 0.694 & 1.000 & \underline{0.907} & 0.716 \\
+FITS & 0.706 & 0.977 & 0.669 & 0.789 & 0.884 & 0.724 & 0.694 & 0.993 & 0.880 & 0.716 \\
+LSTMAD & 0.733 & 0.999 & 0.669 & \underline{0.999} & --- & 0.714 & 0.694 & \underline{1.000} & --- & 0.716 \\
+\midrule
+\multicolumn{11}{l}{\textit{Transformer}} \\
+AnomalyTransformer & 0.730 & 0.970 & 0.626 & 0.956 & 0.835 & 0.713 & 0.662 & 0.992 & 0.783 & 0.638 \\
+PatchTST & 0.716 & 0.913 & 0.669 & 0.903 & 0.884 & 0.713 & 0.694 & 0.994 & 0.871 & 0.716 \\
+TimesNet & 0.723 & 0.958 & 0.669 & 0.839 & 0.927 & 0.711 & 0.694 & 0.996 & 0.877 & 0.716 \\
+TranAD & 0.728 & 0.996 & 0.669 & 0.795 & 0.899 & 0.715 & 0.694 & \textbf{1.000} & 0.894 & 0.716 \\
+\midrule
+\multicolumn{11}{l}{\textit{Density}} \\
+\textit{MTGFLOW} & 0.683 & 0.993 & 0.669 & 0.906 & 0.725 & --- & 0.741 & 1.000 & 0.672 & 0.716 \\
+\midrule
+\multicolumn{11}{l}{\textit{Foundation}} \\
+OFA & 0.735 & 0.960 & 0.669 & 0.987 & 0.944 & 0.668 & \textbf{0.818} & 0.998 & 0.891 & 0.728 \\
+\bottomrule
+\end{tabular}
+\end{table}

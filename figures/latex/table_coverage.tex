@@ -1,0 +1,44 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Coverage: completed cells out of total cells per (model, dataset). A cell counts as completed when its sidecar's status is success. Gaps reflect documented architectural limitations.}
+\label{tab:coverage}
+\begin{tabular}{lcccccccccc}
+\toprule
+Method & CATSv2 & Exathlon & GECCO & MITDB & MSL & OPPORTUNITY & PSM & SMAP & SMD & SWaT \\
+\midrule
+\multicolumn{11}{l}{\textit{Classical}} \\
+CBLOF & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+COPOD & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+EIF & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+HBOS & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+IForest & \textbf{1/5} & \textbf{1/5} & \textbf{1/5} & \textbf{1/5} & \textbf{1/5} & \textbf{1/5} & \textbf{1/5} & \textbf{1/5} & \textbf{1/5} & \textbf{1/5} \\
+KMeansAD & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+KNN & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+LOF & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+PCA & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+\midrule
+\multicolumn{11}{l}{\textit{Reconstruction}} \\
+AutoEncoder & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+OmniAnomaly & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+USAD & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+\midrule
+\multicolumn{11}{l}{\textit{Forecasting}} \\
+CNN & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+FITS & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+LSTMAD & 5/5 & 5/5 & 5/5 & 5/5 & \textbf{0/5} & 5/5 & 5/5 & 5/5 & \textbf{0/5} & 5/5 \\
+\midrule
+\multicolumn{11}{l}{\textit{Transformer}} \\
+AnomalyTransformer & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+PatchTST & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+TimesNet & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+TranAD & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+\midrule
+\multicolumn{11}{l}{\textit{Density}} \\
+\textit{MTGFLOW} & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & \textbf{0/5} & 5/5 & 5/5 & 5/5 & 5/5 \\
+\midrule
+\multicolumn{11}{l}{\textit{Foundation}} \\
+OFA & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 & 5/5 \\
+\bottomrule
+\end{tabular}
+\end{table}

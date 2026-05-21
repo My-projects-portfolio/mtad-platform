@@ -1,0 +1,44 @@
+\begin{table}[t]
+\centering
+\small
+\caption{VUS-PR per (model, dataset), mean across 5 seeds. Best per column in \textbf{bold}, second-best \underline{underlined}, missing cells (---) indicate failed cells (e.g. OOM on high-dimensional inputs).}
+\label{tab:by-dataset-vus-pr}
+\begin{tabular}{lcccccccccc}
+\toprule
+Method & CATSv2 & Exathlon & GECCO & MITDB & MSL & OPPORTUNITY & PSM & SMAP & SMD & SWaT \\
+\midrule
+\multicolumn{11}{l}{\textit{Classical}} \\
+CBLOF & 0.055 & 0.987 & 0.039 & 0.006 & 0.133 & 0.063 & 0.196 & 0.577 & 0.138 & 0.172 \\
+COPOD & 0.045 & 0.912 & 0.037 & 0.006 & 0.124 & 0.054 & 0.204 & 0.522 & 0.115 & 0.163 \\
+EIF & 0.049 & 0.813 & 0.040 & 0.005 & 0.190 & 0.045 & 0.191 & 0.616 & 0.441 & 0.232 \\
+HBOS & 0.046 & 0.598 & 0.036 & 0.006 & 0.124 & 0.081 & 0.167 & 0.614 & 0.151 & 0.245 \\
+IForest & 0.047 & 0.994 & 0.033 & 0.012 & 0.586 & 0.176 & 0.173 & 0.522 & 0.143 & 0.311 \\
+KMeansAD & 0.047 & 0.995 & 0.053 & 0.020 & \textbf{0.996} & 0.039 & 0.207 & \textbf{0.950} & 0.150 & 0.226 \\
+KNN & 0.047 & 0.642 & 0.110 & 0.005 & 0.177 & 0.037 & 0.121 & 0.493 & 0.129 & 0.138 \\
+LOF & 0.062 & 0.185 & 0.130 & 0.005 & 0.179 & 0.054 & 0.150 & 0.614 & 0.210 & 0.164 \\
+PCA & 0.043 & \underline{0.998} & 0.036 & 0.035 & \underline{0.895} & 0.089 & 0.170 & 0.528 & 0.132 & 0.291 \\
+\midrule
+\multicolumn{11}{l}{\textit{Reconstruction}} \\
+AutoEncoder & 0.047 & 0.995 & 0.049 & 0.006 & 0.188 & 0.067 & 0.261 & 0.614 & 0.063 & \textbf{0.606} \\
+OmniAnomaly & \textbf{0.118} & 0.936 & 0.042 & 0.010 & 0.087 & 0.240 & 0.170 & 0.011 & 0.250 & 0.194 \\
+USAD & 0.078 & 0.967 & 0.119 & 0.011 & 0.520 & 0.241 & 0.160 & 0.569 & 0.320 & 0.284 \\
+\midrule
+\multicolumn{11}{l}{\textit{Forecasting}} \\
+CNN & 0.078 & 0.989 & 0.223 & \textbf{0.062} & 0.145 & \underline{0.254} & \underline{0.368} & 0.785 & \textbf{0.639} & 0.291 \\
+FITS & 0.043 & 0.832 & 0.128 & 0.010 & 0.132 & 0.028 & 0.140 & 0.293 & 0.403 & 0.222 \\
+LSTMAD & \underline{0.101} & 0.982 & \underline{0.365} & 0.029 & --- & \textbf{0.259} & \textbf{0.379} & 0.836 & --- & 0.292 \\
+\midrule
+\multicolumn{11}{l}{\textit{Transformer}} \\
+AnomalyTransformer & 0.045 & 0.194 & 0.039 & 0.011 & 0.057 & 0.076 & 0.165 & 0.017 & 0.058 & 0.162 \\
+PatchTST & 0.043 & 0.599 & 0.188 & 0.018 & 0.098 & 0.029 & 0.153 & 0.323 & 0.340 & 0.193 \\
+TimesNet & 0.054 & 0.746 & 0.164 & 0.018 & 0.102 & 0.029 & 0.153 & 0.441 & 0.370 & 0.196 \\
+TranAD & 0.078 & 0.979 & 0.217 & 0.011 & 0.143 & 0.240 & 0.155 & 0.746 & \underline{0.496} & 0.317 \\
+\midrule
+\multicolumn{11}{l}{\textit{Density}} \\
+\textit{MTGFLOW} & 0.033 & \textbf{0.999} & 0.054 & 0.022 & 0.102 & --- & 0.200 & \underline{0.836} & 0.060 & \underline{0.425} \\
+\midrule
+\multicolumn{11}{l}{\textit{Foundation}} \\
+OFA & 0.045 & 0.943 & \textbf{0.508} & \underline{0.045} & 0.603 & 0.027 & 0.212 & 0.665 & 0.315 & 0.188 \\
+\bottomrule
+\end{tabular}
+\end{table}
