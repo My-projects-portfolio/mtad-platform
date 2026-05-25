@@ -49,6 +49,17 @@ _MTGFLOW_DEFAULT_HP = {
 }
 
 
+_HIREFLOW_DEFAULT_HP = {
+    **_MTGFLOW_DEFAULT_HP,
+    "lr_slow_mult": 0.1,
+    "lambda_aux":   0.1,
+    "d_g":    32,
+    "d_fast": 32,
+    "d_slow": 32,
+    "d_rank": 8,
+}
+
+
 def register_mtgflow() -> None:
     """Register MTGFLOW with TSB-AD's dispatch. Idempotent."""
     from TSB_AD import model_wrapper, HP_list
@@ -71,6 +82,26 @@ def register_mtgflow() -> None:
         logger.info("registered MTGFLOW defaults in Optimal_Multi_algo_HP_dict")
 
 
+def register_hire_flow() -> None:
+    """Register HiRE-Flow with TSB-AD's dispatch. Idempotent."""
+    from TSB_AD import model_wrapper, HP_list
+
+    from extensions.models.hire_flow import run_HiREFlow
+
+    if "HiREFlow" not in model_wrapper.Semisupervise_AD_Pool:
+        model_wrapper.Semisupervise_AD_Pool.append("HiREFlow")
+        logger.info("registered HiREFlow in Semisupervise_AD_Pool")
+
+    if not hasattr(model_wrapper, "run_HiREFlow"):
+        model_wrapper.run_HiREFlow = run_HiREFlow
+        logger.info("attached run_HiREFlow to TSB_AD.model_wrapper")
+
+    if "HiREFlow" not in HP_list.Optimal_Multi_algo_HP_dict:
+        HP_list.Optimal_Multi_algo_HP_dict["HiREFlow"] = dict(_HIREFLOW_DEFAULT_HP)
+        logger.info("registered HiREFlow defaults in Optimal_Multi_algo_HP_dict")
+
+
 def register_all() -> None:
     """Register every mtad-platform extension. Add new ``register_xxx()`` calls here."""
     register_mtgflow()
+    register_hire_flow()

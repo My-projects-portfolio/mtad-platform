@@ -1,0 +1,56 @@
+name: HiREFlow
+display_name: "HiRE-Flow"
+full_name: "HiRE-Flow: Hierarchical Relational Evolution Normalizing Flow for Multivariate Time-Series Anomaly Detection"
+
+model_type: semi_supervised
+input_type: multivariate_time_series
+detection_approach: density_estimation
+
+# Paper details (TBD — manuscript in preparation)
+paper_title: "HiRE-Flow: Hierarchical Relational Evolution Normalizing Flow for Multivariate Time-Series Anomaly Detection"
+paper_pdf_url: TBD
+venue: TBD
+year: TBD
+bibtex: TBD
+
+# Upstream dependency (vendored MTGFLOW components)
+upstream_paper: "Detecting Multivariate Time Series Anomalies with Zero Known Label"
+upstream_venue: "AAAI 2023"
+upstream_url: "https://arxiv.org/abs/2208.02108"
+upstream_code: "https://github.com/zqhang/MTGFLOW"
+
+# Platform integration
+module: extensions.models.hire_flow
+detector_class: HiREFlow_AD
+runner_function: run_HiREFlow
+registry_key: HiREFlow
+
+# Default hyperparameters (pinned for reproducibility)
+default_hp:
+  n_blocks: 1
+  input_size: 1
+  hidden_size: 32
+  n_hidden: 1
+  window_size: 60
+  stride_size: 10
+  batch_size: 512
+  epochs: 60
+  lr: 0.002
+  lr_slow_mult: 0.1
+  weight_decay: 0.0005
+  dropout: 0.0
+  batch_norm: false
+  grad_clip_norm: 1.0
+  lambda_aux: 0.01
+  score_aggregation: max
+  d_g: 32
+  d_fast: 32
+  d_slow: 32
+  d_rank: 8
+
+# Novel contributions (for ablation bookkeeping)
+contributions:
+  - lagged_graph_gcn: "GCN conditioned on A_{t-1} not A_t — removes graph contamination"
+  - dual_timescale_gru: "GRU_fast (full LR) + GRU_slow (0.1x LR) on graph encoding sequence"
+  - auxiliary_prediction_loss: "GraphPredictor predicts A_{t+1}; MSE loss prevents GRU collapse"
+  - gated_fusion: "Learned alpha gate mixes spatial h_spatial and relational h_rel context"
