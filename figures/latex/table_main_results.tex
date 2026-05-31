@@ -1,22 +1,22 @@
 \begin{table}[t]
 \centering
 \small
-\caption{Main results: per-model mean $\pm$ std of AUC-PR and AUC-ROC across all (dataset, seed) cells. Best in \textbf{bold}, second-best \underline{underlined}. MTGFLOW (in \textit{italics}) is the method introduced in this work.}
+\caption{Main results: per-model mean $\pm$ std of AUC-PR and AUC-ROC across all (dataset, seed) cells. Best in \textbf{bold}, second-best \underline{underlined}. TOTS_V1 (in \textit{italics}) is the method introduced in this work.}
 \label{tab:main-results}
 \begin{tabular}{lcc}
 \toprule
 Method & AUC-PR & AUC-ROC \\
 \midrule
 \multicolumn{3}{l}{\textit{Classical}} \\
-CBLOF & 0.306$\pm$0.311 & 0.716$\pm$0.147 \\
-COPOD & 0.252$\pm$0.294 & 0.678$\pm$0.134 \\
+CBLOF & 0.306$\pm$0.324 & 0.716$\pm$0.154 \\
+COPOD & 0.252$\pm$0.307 & 0.678$\pm$0.140 \\
 EIF & 0.295$\pm$0.283 & 0.690$\pm$0.153 \\
-HBOS & 0.222$\pm$0.206 & 0.703$\pm$0.104 \\
+HBOS & 0.222$\pm$0.215 & 0.703$\pm$0.108 \\
 IForest & 0.290$\pm$0.288 & 0.806$\pm$0.155 \\
 KMeansAD & 0.381$\pm$0.409 & 0.755$\pm$0.200 \\
-KNN & 0.216$\pm$0.223 & 0.612$\pm$0.168 \\
-LOF & 0.186$\pm$0.169 & 0.601$\pm$0.109 \\
-PCA & 0.321$\pm$0.285 & 0.794$\pm$0.150 \\
+KNN & 0.216$\pm$0.232 & 0.612$\pm$0.176 \\
+LOF & 0.186$\pm$0.177 & 0.601$\pm$0.113 \\
+PCA & 0.321$\pm$0.297 & 0.794$\pm$0.156 \\
 \midrule
 \multicolumn{3}{l}{\textit{Reconstruction}} \\
 AutoEncoder & 0.307$\pm$0.306 & 0.706$\pm$0.149 \\
@@ -35,10 +35,16 @@ TimesNet & 0.199$\pm$0.204 & 0.701$\pm$0.232 \\
 TranAD & 0.361$\pm$0.305 & 0.803$\pm$0.141 \\
 \midrule
 \multicolumn{3}{l}{\textit{Density}} \\
-\textit{MTGFLOW} & 0.327$\pm$0.357 & 0.749$\pm$0.178 \\
+MTGFLOW & 0.327$\pm$0.357 & 0.749$\pm$0.178 \\
 \midrule
 \multicolumn{3}{l}{\textit{Foundation}} \\
 OFA & 0.299$\pm$0.279 & 0.750$\pm$0.263 \\
+\midrule
+\multicolumn{3}{l}{\textit{Proposed}} \\
+\textit{TOTS\_V1} & 0.225$\pm$0.279 & 0.679$\pm$0.223 \\
+\midrule
+\multicolumn{3}{l}{\textit{Other}} \\
+TOTS\_V1\_v1 & 0.221$\pm$0.298 & 0.656$\pm$0.252 \\
 \bottomrule
 \end{tabular}
 \end{table}
